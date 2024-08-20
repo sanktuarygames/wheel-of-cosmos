@@ -1,23 +1,8 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
-using Unity.Mathematics;
 
 
-public enum SliceType
-{
-    Attack,
-    Armor,
-    Heal,
-    Cursed,
-    Special,
-    Super,
-    Void,
-    Normal
-}
 public class SliceProperties : MonoBehaviour
 {
     [Header("Dependencies")]
@@ -27,31 +12,31 @@ public class SliceProperties : MonoBehaviour
 
     [Header("Properties")]
     Dictionary<SliceType, string> _sliceTypeHandler = new Dictionary<SliceType, string>(){
-        {SliceType.Attack, "Attack"},
-        {SliceType.Armor, "Armor"},
-        {SliceType.Heal, "Heal"},
+        {SliceType.Red, "Red"},
+        {SliceType.Blue, "Blue"},
+        {SliceType.Green, "Green"},
+        {SliceType.Pink, "Pink"},
         {SliceType.Cursed, "Cursed"},
-        {SliceType.Special, "Special"},
-        {SliceType.Super, "Super"},
+        {SliceType.Stellar, "Stellar"},
         {SliceType.Void, "Void"},
-        {SliceType.Normal, "Normal"},
     };
     public int sliceValue;
-    private string sliceValueTextString;
-    public string sliceEffectTextString  = null;
+    public int sliceValueMax = 3;
+    private string sliceValueTextString = "";
+    public string sliceEffectTextString = "";
     public TMP_Text sliceValueText = null;
     public TMP_Text sliceEffectText = null;
     private Material sliceMaterial;
 
     void Start()
     {
-        // Use the material to set the color of the slice based on the slice type
         ChangeType(sliceType);
         ChangeEffect(sliceEffectTextString);
         ChangeValueText();
     }
 
-    public void Change(SliceType type, string effect, int value) {
+    public void Change(SliceType type, string effect, int value)
+    {
         ChangeType(type);
         ChangeEffect(effect);
         ChangeValue(value);
@@ -69,11 +54,19 @@ public class SliceProperties : MonoBehaviour
 
     public void ChangeValue(int value)
     {
-        sliceValue += value;
+        sliceValue = value;
         ChangeValueText();
     }
 
-    public void ChangeValueText() {
+    public void AddValue(int value)
+    {
+        sliceValue += value;
+        ChangeValueText();
+        
+    }
+
+    public void ChangeValueText()
+    {
         sliceValueTextString = sliceValue.ToString();
         if (sliceValue == 0)
         {

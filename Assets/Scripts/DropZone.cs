@@ -14,7 +14,7 @@ public class DropZone : MonoBehaviour
     public GameObject currentSlice = null;
     private Vector3 removePosition = new Vector3(13f, -1f, 0);
     Transform cosmos;
-
+    
     void Start()
     {
         // baseMat = GetComponent<MeshRenderer>().material;

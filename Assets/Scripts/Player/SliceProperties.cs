@@ -14,9 +14,9 @@ public enum SliceType
     Heal,
     Cursed,
     Special,
-    Ability,
-    Combined,
-    Gray,
+    Super,
+    Void,
+    Normal
 }
 public class SliceProperties : MonoBehaviour
 {
@@ -32,9 +32,9 @@ public class SliceProperties : MonoBehaviour
         {SliceType.Heal, "Heal"},
         {SliceType.Cursed, "Cursed"},
         {SliceType.Special, "Special"},
-        {SliceType.Ability, "Ability"},
-        {SliceType.Combined, "Combined"},
-        {SliceType.Gray, "Gray"},
+        {SliceType.Super, "Super"},
+        {SliceType.Void, "Void"},
+        {SliceType.Normal, "Normal"},
     };
     public int sliceValue;
     private string sliceValueTextString;
@@ -49,6 +49,12 @@ public class SliceProperties : MonoBehaviour
         ChangeType(sliceType);
         ChangeEffect(sliceEffectTextString);
         ChangeValueText();
+    }
+
+    public void Change(SliceType type, string effect, int value) {
+        ChangeType(type);
+        ChangeEffect(effect);
+        ChangeValue(value);
     }
 
     public void ChangeType(SliceType newType)

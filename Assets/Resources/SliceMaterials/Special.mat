@@ -68,7 +68,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: d5cb38f6e6d975d4b83e20fd789fbdd2, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2DAsset_4ce50c88672d44fcab5558e731a22603_Out_0_Texture2D:
@@ -108,13 +108,13 @@ Material:
     - _GlossyReflections: 0
     - _Max: 250
     - _Metallic: 0
-    - _Min: 1
+    - _Min: 15
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Shades: 0.1
+    - _Shades: 0.01
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -124,12 +124,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_E448CF9F: {r: 61.960495, g: 13.151994, b: 55.375664, a: 0}
-    - Vector2_6925FF1E: {r: 10, g: 1, b: 0, a: 0}
+    - Color_E448CF9F: {r: 82.72217, g: 0, b: 71.69255, a: 1}
+    - Vector2_6925FF1E: {r: 5, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.8072576, g: 0.32907617, b: 0.8207547, a: 1}
+    - _Color: {r: 0.8270028, g: 0.2811944, b: 0.8396226, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Scroll_Speed: {r: 0, g: 0, b: 0, a: 0}
+    - _Scroll_Speed: {r: 1, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2540648487749478623

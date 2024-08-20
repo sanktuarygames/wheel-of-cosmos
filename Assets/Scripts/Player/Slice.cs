@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public class Slice : MonoBehaviour
 {
     [Header("Grab Properties")]
@@ -67,26 +68,32 @@ public class Slice : MonoBehaviour
         if (transform.position.x < xGrabBoundaries.x)
         {
             transform.position = new Vector3(xGrabBoundaries.x, transform.position.y, transform.position.z);
+            rb.velocity = Vector3.zero;
         }
         else if (transform.position.x > xGrabBoundaries.y)
         {
             transform.position = new Vector3(xGrabBoundaries.y, transform.position.y, transform.position.z);
+            rb.velocity = Vector3.zero;
         }
         if (transform.position.y < yGrabBoundaries.x)
         {
             transform.position = new Vector3(transform.position.x, yGrabBoundaries.x, transform.position.z);
+            rb.velocity = Vector3.zero;
         }
         else if (transform.position.y > yGrabBoundaries.y)
         {
             transform.position = new Vector3(transform.position.x, yGrabBoundaries.y, transform.position.z);
+            rb.velocity = Vector3.zero;
         }
         if (transform.position.z < zGrabBoundaries.x)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, zGrabBoundaries.x);
+            rb.velocity = Vector3.zero;
         }
         else if (transform.position.z > zGrabBoundaries.y)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, zGrabBoundaries.y);
+            rb.velocity = Vector3.zero;
         }
     }
 

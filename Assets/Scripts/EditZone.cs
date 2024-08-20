@@ -84,7 +84,7 @@ public class EditZone : DropZone
 
     public void ChangeType() {
         currentTypeIndex++;
-        SliceType newType = SliceType.Combined;
+        SliceType newType = SliceType.Normal;
         switch (currentTypeIndex) {
             case 0:
                 newType = SliceType.Attack;
@@ -93,7 +93,7 @@ public class EditZone : DropZone
                 newType = SliceType.Armor;
                 break;
             case 2:
-                newType = SliceType.Combined;
+                newType = SliceType.Normal;
                 break;
             case 3:
                 newType = SliceType.Heal;
@@ -102,14 +102,14 @@ public class EditZone : DropZone
                 newType = SliceType.Special;
                 break;
             case 5:
-                newType = SliceType.Ability;
+                newType = SliceType.Super;
                 break;
             case 6:
                 newType = SliceType.Cursed;
                 break;
             case 7:
                 currentTypeIndex = -1;
-                newType = SliceType.Gray;
+                newType = SliceType.Void;
                 break;
         }
         currentSliceProperties.ChangeType(newType);

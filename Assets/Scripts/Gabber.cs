@@ -7,6 +7,7 @@ public class Gabber : MonoBehaviour
     [Header("Grab Properties")]
     public LayerMask grabLayerMask;
     public float dragForce = 20f;
+    public float offsetGrabPosition = 5f;
     
     [Header("Y Boundaries")]
     public Vector2 yGrabBoundaries = new Vector2(-1f, 1f);
@@ -18,6 +19,8 @@ public class Gabber : MonoBehaviour
 
 
     private GameObject selectedObject;
+    [SerializeField] private UnityEvent<SliceProperties> onGrabSlice;
+    public UnityEvent<SliceProperties> OnGrabSlice => onGrabSlice;
 
     void Awake()
     {
@@ -44,6 +47,7 @@ public class Gabber : MonoBehaviour
                     selectedObject = hit.collider.gameObject;
                     Cursor.visible = false;
                     selectedObject.GetComponent<Slice>().Grab();
+                    onGrabSlice.Invoke(selectedObject.GetComponent<SliceProperties>());
                 }
 
                 // if (hit.collider != null && hit.collider.gameObject.GetComponent<Arrow>())
@@ -117,7 +121,7 @@ public class Gabber : MonoBehaviour
                     );
                 }
 
-                Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(selectedObject.transform.position).z);
+                Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(selectedObject.transform.position).z + offsetGrabPosition);
                 Vector3 worldPosition = Camera.main.ScreenToWorldPoint(position);
 
 

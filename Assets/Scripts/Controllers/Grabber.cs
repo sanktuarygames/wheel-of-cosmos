@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Gabber : MonoBehaviour
+public class Grabber : MonoBehaviour
 {
     [Header("Grab Properties")]
     public LayerMask grabLayerMask;
@@ -16,6 +16,7 @@ public class Gabber : MonoBehaviour
     [Header("Wheel Properties")]
     public float wheelDragForce = 20f;
     public bool isArrowChanged = false;
+    public bool isInteractableActive = false;
 
 
     private GameObject selectedObject;
@@ -40,13 +41,13 @@ public class Gabber : MonoBehaviour
                 RaycastHit hit = CastRay();
 
                 // Check if the object is in layer ground
-                if (hit.collider != null && hit.collider.gameObject.GetComponent<Slice>())
+                if (hit.collider != null && hit.collider.gameObject.GetComponent<Grabbable>())
                 {
                     // Grab
                     Debug.Log(hit.collider.gameObject.name);
                     selectedObject = hit.collider.gameObject;
                     Cursor.visible = false;
-                    selectedObject.GetComponent<Slice>().Grab();
+                    selectedObject.GetComponent<Grabbable>().Grab();
                     onGrabSlice.Invoke(selectedObject.GetComponent<SliceProperties>());
                 }
 
@@ -83,7 +84,9 @@ public class Gabber : MonoBehaviour
         {
             if (selectedObject == null)
             {
+                Debug.Log("hey");
                 RaycastHit hit = CastRay();
+                // Check if its hitting an arrow
                 if (hit.collider != null && hit.collider.gameObject.GetComponent<Arrow>() && !isArrowChanged)
                 {
                     // Change Arrow
@@ -91,14 +94,23 @@ public class Gabber : MonoBehaviour
                     hit.collider.gameObject.GetComponent<Arrow>().Change();
                 }
 
-                // Check if the object is in layer ground
-                if (hit.collider != null && hit.collider.gameObject.GetComponent<Slice>())
+                // Check if its hitting an interactable
+                if (hit.collider != null && hit.collider.gameObject.GetComponent<Interactable>() && !isInteractableActive)
+                {
+                    Debug.Log("wow");
+                    // Change Interactable
+                    isInteractableActive = true;
+                    hit.collider.gameObject.GetComponent<Interactable>().Interact(this.gameObject);
+                }
+
+                // Check if its hitting a grababble
+                if (hit.collider != null && hit.collider.gameObject.GetComponent<Grabbable>())
                 {
                     // Grab
                     Debug.Log(hit.collider.gameObject.name);
                     selectedObject = hit.collider.gameObject;
                     Cursor.visible = false;
-                    selectedObject.GetComponent<Slice>().Grab();
+                    selectedObject.GetComponent<Grabbable>().Grab();
                 }
             }
             else
@@ -133,7 +145,7 @@ public class Gabber : MonoBehaviour
                 // Calculate the direction from the transform position to the position
                 Vector3 direction = worldPosition - selectedObject.transform.position;
                 direction = direction.normalized;
-                if (selectedObject.transform.position.y > selectedObject.GetComponent<Slice>().yGrabBoundaries.x && selectedObject.transform.position.y < selectedObject.GetComponent<Slice>().yGrabBoundaries.y)
+                if (selectedObject.transform.position.y > selectedObject.GetComponent<Grabbable>().yGrabBoundaries.x && selectedObject.transform.position.y < selectedObject.GetComponent<Grabbable>().yGrabBoundaries.y)
                 {
                     direction.y = 1.2f;
                 }
@@ -145,12 +157,13 @@ public class Gabber : MonoBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             isArrowChanged = false;
+            isInteractableActive = false;
             if (selectedObject != null) {
                 // Drop
                 Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(selectedObject.transform.position).z);
                 Vector3 worldPosition = Camera.main.ScreenToWorldPoint(position);
                 // selectedObject.transform.position = new Vector3(worldPosition.x, 0f, worldPosition.z);
-                selectedObject.GetComponent<Slice>().Drop();
+                selectedObject.GetComponent<Grabbable>().Drop();
                 selectedObject = null;
                 Cursor.visible = true;
             }

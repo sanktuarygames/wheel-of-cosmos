@@ -65,14 +65,14 @@ public class PlayerInputController : MonoBehaviour
         IsLeftClicking = context.canceled;
         if (context.performed)
         {
-            Debug.Log("Left click invoke");
-            Debug.Log(IsLeftClicking);
+            // Debug.Log("Left click invoke");
+            // Debug.Log(IsLeftClicking);
             onLeftClickEvent.Invoke(true);
         } else if (context.canceled)
         {
             onLeftClickEvent.Invoke(IsLeftClicking);
-            Debug.Log("Left click canceled");
-            Debug.Log(!IsLeftClicking);
+            // Debug.Log("Left click canceled");
+            // Debug.Log(!IsLeftClicking);
             onLeftClickEvent.Invoke(false);
         }
     }

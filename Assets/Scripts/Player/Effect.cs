@@ -13,26 +13,28 @@ public class Effect : MonoBehaviour
             case EffectEnum.Armor:
                 Debug.Log("Armor");
                 break;
-            case EffectEnum.Heal:
-                Debug.Log("Heal");
+            case EffectEnum.Vitality:
+                Debug.Log("Vitality");
                 break;
-            case EffectEnum.Cursed:
-                Debug.Log("Cursed");
+            case EffectEnum.DrainVitality:
+                Debug.Log("DrainVitality");
                 break;
-            case EffectEnum.Special:
-                Debug.Log("Special");
+            case EffectEnum.AttackArmor:
+                Debug.Log("AttackArmor");
                 break;
-            case EffectEnum.Super:
-                Debug.Log("Super");
+            case EffectEnum.AttackVitality:
+                Debug.Log("AttackVitality");
                 break;
+            case EffectEnum.ArmorVitality:
+                Debug.Log("ArmorVitality");
+                break;
+            case EffectEnum.Reveal:
+                Debug.Log("Reveal");
+                break;
+            
             case EffectEnum.Void:
-                Debug.Log("Void");
-                break;
-            case EffectEnum.Normal:
-                Debug.Log("Normal");
-                break;
             default:
-                Debug.Log("Default");
+                Debug.Log("Void");
                 break;
         }
     }

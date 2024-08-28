@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-public class Slice : MonoBehaviour
+public class Grabbable : MonoBehaviour
 {
     [Header("Grab Properties")]
     public bool isGrabbed = false;
@@ -15,7 +15,7 @@ public class Slice : MonoBehaviour
 
     [Header("Position Properties")]
     public DropZone closestPosition = null;
-    public float positionMaxDistance = 1f;
+    public float positionMaxDistance = 20f;
     List<DropZone> positions;
     Transform cosmos;
 
@@ -120,6 +120,6 @@ public class Slice : MonoBehaviour
         {
             transform.parent.GetComponent<DropZone>().RemoveSlice();
         }
-        transform.parent = cosmos;
+        // transform.parent = cosmos;
     }
 }

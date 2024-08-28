@@ -28,7 +28,7 @@ public class DropZone : MonoBehaviour
     {
         if (currentSlice != null)
         {
-            currentSlice.transform.SetParent(cosmos, true);
+            // currentSlice.transform.SetParent(cosmos, true);
             // currentSlice.transform.localScale = transform.parent.localScale;
             currentSlice.GetComponent<Rigidbody>().isKinematic = false;
             currentSlice = null;

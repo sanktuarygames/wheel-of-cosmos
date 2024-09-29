@@ -231,9 +231,9 @@ GameObject:
   - component: {fileID: 560862201407970736}
   - component: {fileID: 842690278644267501}
   - component: {fileID: 4172104136791187466}
-  - component: {fileID: 749318133469599535}
+  - component: {fileID: 1925857049462383502}
   m_Layer: 8
-  m_Name: RedSlice
+  m_Name: Slice
   m_TagString: Slice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -374,7 +374,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &749318133469599535
+--- !u!114 &1925857049462383502
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -383,15 +383,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7090729820880342221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07bb8425f23f97f428b28e091a7fea11, type: 3}
+  m_Script: {fileID: 11500000, guid: 0abd769b3c0b2924a8d2c22683d0e944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliceType: 0
-  sliceValue: 4
-  sliceValueMax: 3
-  sliceEffectTextString: hola
-  sliceValueText: {fileID: 6693027594523529382}
-  sliceEffectText: {fileID: 9171233820421108501}
+  sliceSO: {fileID: 11400000, guid: e871a0f92516ac94e8e7ed88714c99e9, type: 2}
+  meshRenderer: {fileID: 7933078932450036406}
+  titleText: {fileID: 9171233820421108501}
+  valueText: {fileID: 6693027594523529382}
 --- !u!1 &8572638268352987360
 GameObject:
   m_ObjectHideFlags: 0

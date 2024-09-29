@@ -53,7 +53,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Max: 300
+    - _Max: 150
     - _Min: 0
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -61,7 +61,7 @@ Material:
     m_Colors:
     - Color_19C6C157: {r: 0.9137255, g: 0.8509804, b: 0.4117647, a: 1}
     - Color_B23AA66E: {r: 2, g: 1.043137, b: 0.2196078, a: 0}
-    - Color_E448CF9F: {r: 1803.9255, g: 1803.9255, b: 1803.9255, a: 1}
+    - Color_E448CF9F: {r: 5.9921575, g: 5.9921575, b: 5.9921575, a: 1}
     - Vector2_6925FF1E: {r: 1, g: 1, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}

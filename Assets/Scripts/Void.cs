@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Void : MonoBehaviour
 {
-    [Header("Current Slice")]
-    private Slice currentSlice = null;
+    [Header("Current Grabbable")]
+    private Grabbable currentGrabbable = null;
     Transform cosmos;
 
     void Start()
@@ -13,13 +13,13 @@ public class Void : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<Slice>())
+        if (other.GetComponent<Grabbable>())
         {
-            currentSlice = other.GetComponent<Slice>();
-            if (!currentSlice.isGrabbed)
+            currentGrabbable = other.GetComponent<Grabbable>();
+            if (!currentGrabbable.isGrabbed)
             {
-                currentSlice.transform.SetParent(cosmos);
-                Destroy(currentSlice.gameObject, 0f);
+                currentGrabbable.transform.SetParent(cosmos);
+                Destroy(currentGrabbable.gameObject, 0f);
             }
         }
     }

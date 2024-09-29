@@ -106,7 +106,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Max: 250
+    - _Max: 100
     - _Metallic: 0
     - _Min: 1
     - _OcclusionStrength: 1
@@ -124,10 +124,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_E448CF9F: {r: 61.960495, g: 13.151994, b: 55.375664, a: 0}
+    - Color_E448CF9F: {r: 0.10818648, g: 0.018549388, b: 0.26216474, a: 0}
     - Vector2_6925FF1E: {r: 10, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.5254903, g: 0, b: 1, a: 1}
+    - _Color: {r: 0.24291533, g: 0, b: 0.46226418, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Scroll_Speed: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

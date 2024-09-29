@@ -47,21 +47,21 @@ public class EditZone : DropZone
         currentSliceProperties.ChangeEffect(value);
     }
 
-    public void AddValue() {
+    public void AddValue(int amount = 1) {
         if (currentSliceProperties == null) {
             Debug.Log("No slice properties found");
             return;
         }
-        currentSliceProperties.ChangeValue(1);
+        currentSliceProperties.ChangeValue(amount);
     }
     
-    public void SubtractValue() {
+    public void SubtractValue(int amount = 1) {
         if (currentSliceProperties == null) {
             Debug.Log("No slice properties found");
             return;
         }
 
-        currentSliceProperties.ChangeValue(-1);
+        currentSliceProperties.ChangeValue(-amount);
     }
 
     public void CreateSlice() {
@@ -82,34 +82,35 @@ public class EditZone : DropZone
         valueInput.text = null;
     }
 
+    public void SetSliceType(SliceType newType) {
+        currentSliceProperties.ChangeType(newType);
+    }
+
     public void ChangeType() {
         currentTypeIndex++;
-        SliceType newType = SliceType.Combined;
+        SliceType newType = SliceType.Red;
         switch (currentTypeIndex) {
             case 0:
-                newType = SliceType.Attack;
+                newType = SliceType.Red;
                 break;
             case 1:
-                newType = SliceType.Armor;
+                newType = SliceType.Blue;
                 break;
             case 2:
-                newType = SliceType.Combined;
+                newType = SliceType.Green;
                 break;
             case 3:
-                newType = SliceType.Heal;
+                newType = SliceType.Pink;
                 break;
             case 4:
-                newType = SliceType.Special;
-                break;
-            case 5:
-                newType = SliceType.Ability;
-                break;
-            case 6:
                 newType = SliceType.Cursed;
                 break;
-            case 7:
+            case 5:
+                newType = SliceType.Stellar;
+                break;
+            case 6:
                 currentTypeIndex = -1;
-                newType = SliceType.Gray;
+                newType = SliceType.Void;
                 break;
         }
         currentSliceProperties.ChangeType(newType);

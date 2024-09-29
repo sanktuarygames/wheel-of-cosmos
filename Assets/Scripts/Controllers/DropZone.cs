@@ -13,12 +13,12 @@ public class DropZone : MonoBehaviour
     [Header("Current Slice")]
     public GameObject currentSlice = null;
     private Vector3 removePosition = new Vector3(13f, -1f, 0);
-    Transform cosmos;
+    DropZoneController dropZoneController;
     
     void Start()
     {
         // baseMat = GetComponent<MeshRenderer>().material;
-        cosmos = GameObject.Find("Cosmos").transform;
+        dropZoneController = GetComponentInParent<DropZoneController>();
         if (transform.childCount == 0) return;
         currentSlice = transform.GetChild(0)?.gameObject;
         currentSlice.transform.localScale = Vector3.one;
@@ -28,8 +28,6 @@ public class DropZone : MonoBehaviour
     {
         if (currentSlice != null)
         {
-            // currentSlice.transform.SetParent(cosmos, true);
-            // currentSlice.transform.localScale = transform.parent.localScale;
             currentSlice.GetComponent<Rigidbody>().isKinematic = false;
             currentSlice = null;
         }
@@ -39,7 +37,11 @@ public class DropZone : MonoBehaviour
     {
         if (currentSlice != null)
         {
-            currentSlice.transform.position = removePosition;
+            if (dropZoneController.GetEmptyDropZone() != null) {
+                dropZoneController.GetEmptyDropZone().AddSlice(currentSlice);
+            } else {
+                currentSlice.transform.position = removePosition; // TODO: this will be the helper position, where created slices will be placed
+            }
             RemoveSlice();
         }
 

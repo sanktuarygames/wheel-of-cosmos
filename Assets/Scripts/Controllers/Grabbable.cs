@@ -16,48 +16,25 @@ public class Grabbable : MonoBehaviour
     [Header("Position Properties")]
     public DropZone closestPosition = null;
     public float positionMaxDistance = 20f;
-    List<DropZone> positions;
+    public string dropZoneTag = "SliceDropZone";
+    DropZoneController dropZoneController;
     Transform cosmos;
-
     Rigidbody rb;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         cosmos = GameObject.Find("Cosmos").transform;
-        positions = new List<DropZone>();
-        foreach (GameObject dropZone in GameObject.FindGameObjectsWithTag("DropZone"))
-        {
-            positions.Add(dropZone.GetComponent<DropZone>());
-        }
+        dropZoneController = GameObject.FindWithTag(dropZoneTag).GetComponent<DropZoneController>();
     }
 
     void Update()
     {
         if (isGrabbed)
         {
-            float nearestDistance = Mathf.Infinity;
-            foreach (DropZone position in positions)
-            {
-                float currentDistance = Vector3.Distance(transform.position, position.transform.position);
-                if (currentDistance < nearestDistance)
-                {
-                    // Debug.Log("Found a closer position: " + position.name);
-                    // Debug.Log("Distance: " + currentDistance);
-                    closestPosition?.Unhighlight();
-                    closestPosition = position;
-                    closestPosition.Highlight();
-                    nearestDistance = currentDistance;
-                }
-            }
-            if (nearestDistance > positionMaxDistance)
-            {
-                // Debug.Log("Too far from any DropZone");
-                closestPosition.Unhighlight();
-                closestPosition = null;
-            }
+            dropZoneController.UnhighlightAllDropZones();
+            dropZoneController.HighlightClosestDropZone(transform.position);
         }
 
         if (!rb.isKinematic) LimitPositionToBoundaries();
@@ -99,12 +76,11 @@ public class Grabbable : MonoBehaviour
 
     public void Drop()
     {
-        // TODO: Fix scale issue
-        Debug.Log("Dropped");
-        isGrabbed = false;
+        // Debug.Log("Dropped");
+        closestPosition = dropZoneController.GetClosestDropZone(transform.position);
         if (closestPosition != null)
         {
-            Debug.Log("Dropped in: " + closestPosition.name);
+            // Debug.Log("Dropped in: " + closestPosition.name);
             closestPosition.Unhighlight();
             rb.velocity = Vector3.zero;
             closestPosition.AddSlice(gameObject);
@@ -113,13 +89,12 @@ public class Grabbable : MonoBehaviour
 
     public void Grab()
     {
-        Debug.Log("Grabbed");
+        // Debug.Log("Grabbed");
         isGrabbed = true;
         rb.isKinematic = false;
         if (transform.parent.GetComponent<DropZone>() != null)
         {
             transform.parent.GetComponent<DropZone>().RemoveSlice();
         }
-        // transform.parent = cosmos;
     }
 }

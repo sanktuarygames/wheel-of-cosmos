@@ -53,7 +53,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Max: 1000
+    - _Max: 600
     - _Min: 0
     - _QueueControl: 0
     - _QueueOffset: 0

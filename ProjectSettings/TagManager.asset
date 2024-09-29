@@ -8,6 +8,7 @@ TagManager:
   - DropZone
   - Slices
   - Cosmos
+  - SliceDropZone
   layers:
   - Default
   - TransparentFX

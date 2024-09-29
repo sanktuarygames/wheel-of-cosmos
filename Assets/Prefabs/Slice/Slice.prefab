@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'reveal new '
+  m_text: hola
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5707ed6d45a329f418479277d00bec8d, type: 2}
   m_sharedMaterial: {fileID: -4322595671486773214, guid: 5707ed6d45a329f418479277d00bec8d, type: 2}
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 4172104136791187466}
   - component: {fileID: 749318133469599535}
   m_Layer: 8
-  m_Name: Slice
+  m_Name: RedSlice
   m_TagString: Slice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284,7 +284,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b0af2afee3187c6449eda6d238e6a2ff, type: 2}
+  - {fileID: 2100000, guid: 904f53bf7fb55af4fa5e7c529995a518, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -346,6 +346,7 @@ MonoBehaviour:
   zGrabBoundaries: {x: -8, y: 8}
   closestPosition: {fileID: 0}
   positionMaxDistance: 15
+  dropZoneTag: SliceDropZone
 --- !u!54 &4172104136791187466
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -387,6 +388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliceType: 0
   sliceValue: 4
+  sliceValueMax: 3
   sliceEffectTextString: hola
   sliceValueText: {fileID: 6693027594523529382}
   sliceEffectText: {fileID: 9171233820421108501}
@@ -558,7 +560,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 22
+  m_text: 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5707ed6d45a329f418479277d00bec8d, type: 2}
   m_sharedMaterial: {fileID: -4322595671486773214, guid: 5707ed6d45a329f418479277d00bec8d, type: 2}

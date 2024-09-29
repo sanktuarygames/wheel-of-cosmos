@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-
 public class SliceProperties : MonoBehaviour
 {
     [Header("Dependencies")]
@@ -27,6 +26,12 @@ public class SliceProperties : MonoBehaviour
     public TMP_Text sliceValueText = null;
     public TMP_Text sliceEffectText = null;
     private Material sliceMaterial;
+
+    private void OnValidate() {
+        ChangeType(sliceType);
+        ChangeEffect(sliceEffectTextString);
+        ChangeValueText();
+    }
 
     void Start()
     {

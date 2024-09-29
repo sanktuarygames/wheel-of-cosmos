@@ -84,7 +84,6 @@ public class Grabber : MonoBehaviour
         {
             if (selectedObject == null)
             {
-                Debug.Log("hey");
                 RaycastHit hit = CastRay();
                 // Check if its hitting an arrow
                 if (hit.collider != null && hit.collider.gameObject.GetComponent<Arrow>() && !isArrowChanged)
@@ -97,8 +96,7 @@ public class Grabber : MonoBehaviour
                 // Check if its hitting an interactable
                 if (hit.collider != null && hit.collider.gameObject.GetComponent<Interactable>() && !isInteractableActive)
                 {
-                    Debug.Log("wow");
-                    // Change Interactable
+                    // Activate Interactable
                     isInteractableActive = true;
                     hit.collider.gameObject.GetComponent<Interactable>().Interact(this.gameObject);
                 }
@@ -107,7 +105,7 @@ public class Grabber : MonoBehaviour
                 if (hit.collider != null && hit.collider.gameObject.GetComponent<Grabbable>())
                 {
                     // Grab
-                    Debug.Log(hit.collider.gameObject.name);
+                    // Debug.Log(hit.collider.gameObject.name);
                     selectedObject = hit.collider.gameObject;
                     Cursor.visible = false;
                     selectedObject.GetComponent<Grabbable>().Grab();

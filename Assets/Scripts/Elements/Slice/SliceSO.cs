@@ -8,5 +8,5 @@ public class SliceSO : ScriptableObject
     public int initialValue = 1;
     public int maxValue = 3;
     public SliceType type;
-    public Effect[] effects;
+    public SliceEffect effect;
 }

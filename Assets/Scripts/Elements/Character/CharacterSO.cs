@@ -5,11 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Character", menuName = "Elements/Character", order = 1)]
 public class CharacterSO : ScriptableObject
 {
-    public string title;
+    public string name;
     public string description;
-    public WheelSO initialWheelPrefab;
+    public WheelSO initialWheel;
     public ArrowSO[] initialArrows;
-    public Inventory initialInventoryPrefab;
+    public InventorySO initialInventory;
     public int initialHealth = 15;
     public int initialMaxHealth = 15;
     public int initialArmor = 0;

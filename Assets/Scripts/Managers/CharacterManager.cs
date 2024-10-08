@@ -9,6 +9,7 @@ public class CharacterManager : MonoBehaviour
 
     void Start()
     {
+        if (characters.Length == 0) return;
         foreach (Character character in characters)
         {
             character.gameObject.SetActive(false);

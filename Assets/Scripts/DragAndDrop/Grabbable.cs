@@ -18,14 +18,12 @@ public class Grabbable : MonoBehaviour
     public float positionMaxDistance = 20f;
     public string dropZoneTag = "SliceDropZone";
     DropZoneController dropZoneController;
-    Transform cosmos;
     Rigidbody rb;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        cosmos = GameObject.Find("Cosmos").transform;
         dropZoneController = GameObject.FindWithTag(dropZoneTag).GetComponent<DropZoneController>();
     }
 

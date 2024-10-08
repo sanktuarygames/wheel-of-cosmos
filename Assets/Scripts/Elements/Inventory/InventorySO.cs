@@ -1,18 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class InventorySO : MonoBehaviour
+public class InventorySO : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string title;
+    public GameObject inventoryPrefab;
+    public ArrowSO[] initialArrows;
 }

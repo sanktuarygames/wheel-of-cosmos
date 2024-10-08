@@ -6,9 +6,9 @@ using TMPro;
 public class Slice : MonoBehaviour
 {
     public SliceSO sliceSO;
-    private int currentValue;
+    public int currentValue;
     private SliceType currentType;
-    private Effect[] currentEffects;
+    private SliceEffect currentEffect;
 
     [SerializeField]
     private MeshRenderer meshRenderer = null;
@@ -40,7 +40,7 @@ public class Slice : MonoBehaviour
     {
         ChangeType(sliceSO.type);
         ChangeValue(sliceSO.initialValue);
-        ChangeEffects(sliceSO.effects);
+        ChangeEffect(sliceSO.effect);
         ChangeTitle(sliceSO.title);
     }
 
@@ -67,9 +67,9 @@ public class Slice : MonoBehaviour
         valueText.text = valueTextString;
     }
 
-    public void ChangeEffects(Effect[] effects)
+    public void ChangeEffect(SliceEffect effect)
     {
-        currentEffects = effects;
+        currentEffect = effect;
     }
 
     public void ChangeTitle(string title)

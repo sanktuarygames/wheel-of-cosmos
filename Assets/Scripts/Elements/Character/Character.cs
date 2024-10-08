@@ -4,28 +4,35 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public string characterName;
-    public CharacterSO characterSO;
+    [SerializeField]
+    private CharacterSO characterSO;
     public Wheel wheel;
     public Inventory inventory;
 
-    private int currentHealth = 15;
-    private int currentMaxHealth = 15;
-    private int currentArmor = 0;
-    private int currentMaxArmor = 0;
-    private Effect[] currentEffects;
+    public int currentHealth = 15;
+    public int currentMaxHealth = 15;
+    public int currentArmor = 0;
+    public int currentMaxArmor = 0;
+    public Effect[] currentEffects;
 
-    public void Initialize()
+    public Character(CharacterSO characterSO)
     {
-        wheel.Initialize(characterSO.initialWheelPrefab);
-        Initialize(characterSO);
-    }
-    public void Initialize(CharacterSO characterSO)
-    {
-        inventory = Instantiate(characterSO.initialInventoryPrefab);
+        this.characterSO = characterSO;
+        characterName = characterSO.name;
         currentHealth = characterSO.initialHealth;
         currentMaxHealth = characterSO.initialMaxHealth;
         currentArmor = characterSO.initialArmor;
         currentMaxArmor = characterSO.initialMaxArmor;
         currentEffects = characterSO.effects;
+
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        // wheel = new Wheel(characterSO.initialWheel);
+        // inventory = new Inventory(characterSO.initialInventory);
+        wheel.Initialize(characterSO.initialWheel);
+        inventory.Initialize(characterSO.initialInventory);
     }
 }

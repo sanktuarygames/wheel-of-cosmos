@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public InventorySO inventorySO;
+    public GameObject inventoryPrefab;
+    public Arrow[] arrows;
 
-    // Update is called once per frame
-    void Update()
+    public void Initialize()
     {
-        
+        Initialize(inventorySO);
+    }
+    public void Initialize(InventorySO inventorySO)
+    {
+        inventoryPrefab = Instantiate(inventorySO.inventoryPrefab);
+        arrows = new Arrow[inventorySO.initialArrows.Length];
+        // for (int i = 0; i < inventorySO.initialArrows.Length; i++)
+        // {
+        //     arrows[i] = Instantiate(inventorySO.initialArrows[i].Initialize());
+        // }
     }
 }

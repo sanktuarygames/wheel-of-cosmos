@@ -27,7 +27,6 @@ public class ViewManager : MonoBehaviour
     }
 
     public void ShowSliceEditView() {
-        wheelEditView.SetActive(false);
         sliceEditView.SetActive(true);
         arrowEditView.SetActive(false);
         characterSelectView.SetActive(false);

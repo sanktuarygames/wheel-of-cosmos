@@ -5,8 +5,11 @@ using UnityEngine.InputSystem;
 /// <summary>
 ///     This class encapsulate all the input processing for a player using Unity's new input system
 /// </summary>
+
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerInputController : MonoBehaviour
 {
+    public PlayerInputController instance { get; private set; }
     private Camera _camera;
     public bool IsPaused { get; set; }
     protected bool IsLeftClicking { get; set; }
@@ -15,6 +18,11 @@ public class PlayerInputController : MonoBehaviour
 
     protected void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         playerInput = GetComponent<PlayerInput>();
 
         PlayerInputActions playerInputActions = new PlayerInputActions();
@@ -24,6 +32,17 @@ public class PlayerInputController : MonoBehaviour
         playerInputActions.Player.LeftClick.canceled += OnLeftClick;
         playerInputActions.Player.RightClick.canceled += OnRightClick;
         _camera = Camera.main;
+
+        #if UNITY_STANDALONE_WIN
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        #endif
+
+        #if UNITY_ANDROID
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        #endif
+
     }
 
     #region Methods called by unity input events

@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrowSO: {fileID: 11400000, guid: 72ad62779e44c5f47b7eeed618e82570, type: 2}
-  meshRenderer: {fileID: 0}
+  currentType: {fileID: 0}
+  meshRenderer: {fileID: 9085459833471043611}
 --- !u!114 &3732982645613837890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,12 +115,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrabbed: 0
+  dragForce: 20
+  offsetGrabPosition: {x: 0, y: 0, z: 5}
   xGrabBoundaries: {x: 2, y: 20}
   yGrabBoundaries: {x: -20, y: 3}
   zGrabBoundaries: {x: -4, y: 4}
-  closestPosition: {fileID: 0}
-  positionMaxDistance: 20
-  dropZoneTag: SliceDropZone
 --- !u!64 &7762507764824477909
 MeshCollider:
   m_ObjectHideFlags: 0

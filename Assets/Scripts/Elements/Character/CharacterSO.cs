@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Character", menuName = "Elements/Character", order = 1)]
 public class CharacterSO : ScriptableObject
 {
-    public string name;
+    public string code;
+    public string displayName;
     public string description;
+    public Sprite icon;
     public WheelSO initialWheel;
     public ArrowSO[] initialArrows;
     public InventorySO initialInventory;

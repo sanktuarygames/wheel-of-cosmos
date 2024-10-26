@@ -1,18 +1,20 @@
 using System;
 using UnityEngine;
 
+[Serializable]
+public enum View
+{
+    MainMenu,
+    GameSetup,
+    Adventure,
+    Character,
+    SliceEdit,
+    InventoryEdit
+}
+
 public class NavigationMaster : MonoBehaviour
 {
-    [Serializable]
-    public enum View
-    {
-        MainMenu,
-        GameSetup,
-        Adventure,
-        Character,
-        SliceEdit,
-        InventoryEdit
-    }
+    public static NavigationMaster Instance { set; get; }
 
     public GameObject mainMenuView;
     public GameObject gameSetupView;
@@ -20,6 +22,18 @@ public class NavigationMaster : MonoBehaviour
     public GameObject characterView;
     public GameObject sliceEditView;
     public GameObject inventoryEditView;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        // DontDestroyOnLoad(gameObject);
+    }
 
     public void ShowView(View view)
     {

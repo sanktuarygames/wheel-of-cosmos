@@ -7,8 +7,8 @@ public class Slice : MonoBehaviour
 {
     public SliceSO sliceSO;
     public int currentValue;
-    private SliceType currentType;
-    private SliceEffect currentEffect;
+    public SliceType currentType;
+    public SliceEffect currentEffect;
 
     [SerializeField]
     private MeshRenderer meshRenderer = null;
@@ -22,18 +22,24 @@ public class Slice : MonoBehaviour
 
     void Start()
     {
-        if (meshRenderer == null)
-        {
-            meshRenderer = GetComponent<MeshRenderer>();
-        }
-        UpdateSOValues();
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     // SO methods
     public void Initialize(SliceSO newSO)
     {
         sliceSO = newSO;
-        UpdateSOValues();
+        ChangeValue(sliceSO.initialValue);
+        ChangeEffect(sliceSO.effect);
+        ChangeTitle(sliceSO.title);
+        ChangeType(sliceSO.type);
+    }
+
+    public void UpdateDisplay()
+    {
+        meshRenderer.material = currentType.material;
+        valueText.text = valueTextString;
+        titleText.text = titleTextString;
     }
 
     public void UpdateSOValues()
@@ -48,23 +54,20 @@ public class Slice : MonoBehaviour
     public void ChangeType(SliceType newType)
     {
         currentType = newType;
-        meshRenderer.material = currentType.material;
     }
 
     public void ChangeValue(int value)
     {
         currentValue = value;
-        ChangeValueText();
-    }
-
-    public void ChangeValueText()
-    {
         valueTextString = currentValue.ToString();
         if (currentValue == 0)
         {
             valueTextString = "";
         }
-        valueText.text = valueTextString;
+    }
+
+    public void ChangeValueText()
+    {
     }
 
     public void ChangeEffect(SliceEffect effect)
@@ -75,6 +78,5 @@ public class Slice : MonoBehaviour
     public void ChangeTitle(string title)
     {
         titleTextString = title;
-        titleText.text = titleTextString;
     }
 }

@@ -9,6 +9,7 @@ TagManager:
   - Slices
   - Cosmos
   - SliceDropZone
+  - ArrowDropZone
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - PostProcess
   - Grabbable
-  - 
+  - Interactable
   - 
   - 
   - 

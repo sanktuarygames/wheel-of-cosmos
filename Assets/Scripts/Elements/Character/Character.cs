@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    public string code;
     public string characterName;
     [SerializeField]
     private CharacterSO characterSO;
@@ -15,9 +16,21 @@ public class Character : MonoBehaviour
     public int currentMaxArmor = 0;
     public Effect[] currentEffects;
 
-    public Character(CharacterSO characterSO)
+    public void Initialize(CharacterSO characterSO)
     {
         this.characterSO = characterSO;
+        LoadData();
+        wheel = new GameObject("Wheel").AddComponent<Wheel>();
+        inventory = new GameObject("Inventory").AddComponent<Inventory>();
+        wheel.Initialize(characterSO.initialWheel);
+        inventory.Initialize(characterSO.initialInventory);
+        wheel.transform.SetParent(transform);
+        inventory.transform.SetParent(transform);
+    }
+
+    private void LoadData()
+    {
+        code = characterSO.code;
         characterName = characterSO.name;
         currentHealth = characterSO.initialHealth;
         currentMaxHealth = characterSO.initialMaxHealth;
@@ -25,14 +38,11 @@ public class Character : MonoBehaviour
         currentMaxArmor = characterSO.initialMaxArmor;
         currentEffects = characterSO.effects;
 
-        Initialize();
-    }
+        // Load the data into the wheel and inventory
 
-    public void Initialize()
-    {
         // wheel = new Wheel(characterSO.initialWheel);
         // inventory = new Inventory(characterSO.initialInventory);
-        wheel.Initialize(characterSO.initialWheel);
-        inventory.Initialize(characterSO.initialInventory);
+        // wheel.Initialize(characterSO.initialWheel);
+        // inventory.Initialize(characterSO.initialInventory);
     }
 }

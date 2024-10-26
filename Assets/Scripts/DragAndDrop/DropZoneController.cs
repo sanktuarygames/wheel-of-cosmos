@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class DropZoneController : MonoBehaviour
 {
-    List<DropZone> dropZones;
-    // Start is called before the first frame update
-    void Start()
+    public DropZone[] dropZones;
+    public bool isFrozen = true;
+
+
+    void Awake()
     {
-        dropZones = new List<DropZone>();
+        dropZones = new DropZone[transform.childCount];
         for (int i = 0; i < transform.childCount; i++)
         {
-            dropZones.Add(transform.GetChild(i).GetComponent<DropZone>());
+            dropZones[i] = transform.GetChild(i).GetComponent<DropZone>();
         }
     }
 
@@ -48,11 +50,11 @@ public class DropZoneController : MonoBehaviour
         }
     }
 
-    public void RemoveAllSlices()
+    public void RemoveAllItems()
     {
         foreach (DropZone dropZone in dropZones)
         {
-            dropZone.RemoveSlice();
+            dropZone.RemoveItem();
         }
     }
 
@@ -60,7 +62,7 @@ public class DropZoneController : MonoBehaviour
     {
         foreach (DropZone dropZone in dropZones)
         {
-            if (dropZone.currentSlice == null)
+            if (dropZone.currentItem == null)
             {
                 return dropZone;
             }

@@ -3,31 +3,28 @@ using System.Collections;
 
 public class Arrow : MonoBehaviour {
     public ArrowSO arrowSO;
-    private ArrowType currentType;
+    public ArrowType currentType;
 
     [SerializeField]
     private MeshRenderer meshRenderer = null;
 
     void Start() {
-        if (meshRenderer == null) {
-            meshRenderer = GetComponent<MeshRenderer>();
-        }
-        UpdateSOValues();
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     // SO methods
     public void Initialize(ArrowSO newSO) {
         arrowSO = newSO;
-        UpdateSOValues();
-    }
-
-    public void UpdateSOValues() {
         ChangeType(arrowSO.type);
     }
 
+    public void UpdateDisplay() {
+        meshRenderer.material = currentType.material;
+    }
+
+
     public void ChangeType(ArrowType newType) {
         currentType = newType;
-        meshRenderer.material = currentType.material;
     }
 
     // Arrow methods

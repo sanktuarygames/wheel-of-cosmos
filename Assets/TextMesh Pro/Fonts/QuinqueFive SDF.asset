@@ -132,8 +132,8 @@ Material:
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
+    - _StencilReadMask: 1
+    - _StencilWriteMask: 0
     - _TextureHeight: 1024
     - _TextureWidth: 1024
     - _UnderlayDilate: 0
@@ -544,6 +544,21 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
+  - m_Index: 29
+    m_Metrics:
+      m_Width: 90
+      m_Height: 90
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 71.984375
+      m_HorizontalAdvance: 108.015625
+    m_GlyphRect:
+      m_X: 592
+      m_Y: 707
+      m_Width: 90
+      m_Height: 91
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
   - m_Index: 30
     m_Metrics:
       m_Width: 90
@@ -704,6 +719,21 @@ MonoBehaviour:
     m_GlyphRect:
       m_X: 882
       m_Y: 340
+      m_Width: 90
+      m_Height: 91
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 44
+    m_Metrics:
+      m_Width: 90
+      m_Height: 90
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 71.984375
+      m_HorizontalAdvance: 108.015625
+    m_GlyphRect:
+      m_X: 555
+      m_Y: 597
       m_Width: 90
       m_Height: 91
     m_Scale: 1
@@ -1354,36 +1384,6 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-  - m_Index: 44
-    m_Metrics:
-      m_Width: 90
-      m_Height: 90
-      m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 71.984375
-      m_HorizontalAdvance: 108.015625
-    m_GlyphRect:
-      m_X: 555
-      m_Y: 597
-      m_Width: 90
-      m_Height: 91
-    m_Scale: 1
-    m_AtlasIndex: 0
-    m_ClassDefinitionType: 0
-  - m_Index: 29
-    m_Metrics:
-      m_Width: 90
-      m_Height: 90
-      m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 71.984375
-      m_HorizontalAdvance: 108.015625
-    m_GlyphRect:
-      m_X: 592
-      m_Y: 707
-      m_Width: 90
-      m_Height: 91
-    m_Scale: 1
-    m_AtlasIndex: 0
-    m_ClassDefinitionType: 0
   m_CharacterTable:
   - m_ElementType: 1
     m_Unicode: 32
@@ -1478,6 +1478,10 @@ MonoBehaviour:
     m_GlyphIndex: 28
     m_Scale: 1
   - m_ElementType: 1
+    m_Unicode: 60
+    m_GlyphIndex: 29
+    m_Scale: 1
+  - m_ElementType: 1
     m_Unicode: 61
     m_GlyphIndex: 30
     m_Scale: 1
@@ -1520,6 +1524,10 @@ MonoBehaviour:
   - m_ElementType: 1
     m_Unicode: 74
     m_GlyphIndex: 43
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 75
+    m_GlyphIndex: 44
     m_Scale: 1
   - m_ElementType: 1
     m_Unicode: 76
@@ -1692,14 +1700,6 @@ MonoBehaviour:
   - m_ElementType: 1
     m_Unicode: 8593
     m_GlyphIndex: 202
-    m_Scale: 1
-  - m_ElementType: 1
-    m_Unicode: 75
-    m_GlyphIndex: 44
-    m_Scale: 1
-  - m_ElementType: 1
-    m_Unicode: 60
-    m_GlyphIndex: 29
     m_Scale: 1
   m_AtlasTextures:
   - {fileID: -4394465810070266240}

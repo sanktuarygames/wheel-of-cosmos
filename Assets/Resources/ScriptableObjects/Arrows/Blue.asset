@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Blue
   m_EditorClassIdentifier: 
   title: 
-  type: {fileID: 11400000, guid: 88676be78d8eecf4ca39d004f5e30a23, type: 2}
+  type: {fileID: 11400000, guid: c00c7fdd11d01124984cca1c4abf0d6a, type: 2}
   effects: []

@@ -15,11 +15,12 @@ public class Inventory : MonoBehaviour
     }
     public void Initialize(InventorySO inventorySO)
     {
-        inventoryPrefab = Instantiate(inventorySO.inventoryPrefab);
-        arrows = new Arrow[inventorySO.initialArrows.Length];
+        this.inventorySO = inventorySO;
+        // arrows = new Arrow[inventorySO.initialArrows.Length];
         // for (int i = 0; i < inventorySO.initialArrows.Length; i++)
         // {
-        //     arrows[i] = Instantiate(inventorySO.initialArrows[i].Initialize());
+        //     arrows[i] = Instantiate(inventoryPrefab, transform).GetComponent<Arrow>();
+        //     arrows[i].Initialize(inventorySO.initialArrows[i]);
         // }
     }
 }

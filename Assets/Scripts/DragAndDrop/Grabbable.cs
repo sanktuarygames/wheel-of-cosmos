@@ -4,41 +4,53 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-public class Grabbable : MonoBehaviour
+public class Grabbable : MonoBehaviour, IGrabbable
 {
     [Header("Grab Properties")]
     public bool isGrabbed = false;
-    public Vector2 xGrabBoundaries = new Vector2(2f, 20f);
-    public Vector2 yGrabBoundaries = new Vector2(-20f, 3f);
-    public Vector2 zGrabBoundaries = new Vector2(-4f, 4f);
+    public float dragForce = 20f;
+    public Vector3 offsetGrabPosition = new Vector3(0f, 0f, 5f);
+    public Vector2 xGrabBoundaries = new Vector2(-15f, 20f);
+    public Vector2 yGrabBoundaries = new Vector2(0f, 7.5f);
+    public Vector2 zGrabBoundaries = new Vector2(-8f, 8f);
+    private Rigidbody rb;
 
 
-    [Header("Position Properties")]
-    public DropZone closestPosition = null;
-    public float positionMaxDistance = 20f;
-    public string dropZoneTag = "SliceDropZone";
-    DropZoneController dropZoneController;
-    Rigidbody rb;
-
-
-    void Start()
+    public virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
-        dropZoneController = GameObject.FindWithTag(dropZoneTag).GetComponent<DropZoneController>();
     }
 
-    void Update()
+    public virtual void Update()
     {
         if (isGrabbed)
         {
-            dropZoneController.UnhighlightAllDropZones();
-            dropZoneController.HighlightClosestDropZone(transform.position);
+            Drag();
+            LimitPositionToBoundaries();
         }
-
-        if (!rb.isKinematic) LimitPositionToBoundaries();
     }
 
-    public void LimitPositionToBoundaries()
+    public virtual void Drag() {
+        Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z) + offsetGrabPosition;
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(position);
+
+
+        if (Vector3.Distance(transform.position, worldPosition) < 0.1f)
+        {
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            return;
+        }
+        // Calculate the direction from the transform position to the position
+        Vector3 direction = worldPosition - transform.position;
+        direction = direction.normalized;
+        if (transform.position.y > GetComponent<Grabbable>().yGrabBoundaries.x && transform.position.y < GetComponent<Grabbable>().yGrabBoundaries.y)
+        {
+            direction.y = 1.2f;
+        }
+        GetComponent<Rigidbody>().velocity = direction * dragForce;
+    }
+
+    public virtual void LimitPositionToBoundaries()
     {
         if (transform.position.x < xGrabBoundaries.x)
         {
@@ -72,27 +84,16 @@ public class Grabbable : MonoBehaviour
         }
     }
 
-    public void Drop()
+    public virtual void Drop()
     {
-        // Debug.Log("Dropped");
-        closestPosition = dropZoneController.GetClosestDropZone(transform.position);
-        if (closestPosition != null)
-        {
-            // Debug.Log("Dropped in: " + closestPosition.name);
-            closestPosition.Unhighlight();
-            rb.velocity = Vector3.zero;
-            closestPosition.AddSlice(gameObject);
-        }
+        rb.velocity = Vector3.zero;
+        rb.isKinematic = true;
+        isGrabbed = false;
     }
 
-    public void Grab()
+    public virtual void Grab()
     {
-        // Debug.Log("Grabbed");
         isGrabbed = true;
         rb.isKinematic = false;
-        if (transform.parent.GetComponent<DropZone>() != null)
-        {
-            transform.parent.GetComponent<DropZone>().RemoveSlice();
-        }
     }
 }

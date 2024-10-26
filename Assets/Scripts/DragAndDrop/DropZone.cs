@@ -10,8 +10,8 @@ public class DropZone : MonoBehaviour
     [SerializeField] private Material highlightMat = null;
     public Vector3 offsetPosition;
 
-    [Header("Current Slice")]
-    public GameObject currentSlice = null;
+    [Header("Current Item")]
+    public GameObject currentItem = null;
     private Vector3 removePosition = new Vector3(13f, -1f, 0);
     DropZoneController dropZoneController;
     
@@ -20,37 +20,37 @@ public class DropZone : MonoBehaviour
         // baseMat = GetComponent<MeshRenderer>().material;
         dropZoneController = GetComponentInParent<DropZoneController>();
         if (transform.childCount == 0) return;
-        currentSlice = transform.GetChild(0)?.gameObject;
-        currentSlice.transform.localScale = Vector3.one;
+        currentItem = transform.GetChild(0)?.gameObject;
     }
 
-    public virtual void RemoveSlice()
+    public virtual void RemoveItem()
     {
-        if (currentSlice != null)
+        if (currentItem != null)
         {
-            currentSlice.GetComponent<Rigidbody>().isKinematic = false;
-            currentSlice = null;
+            currentItem.GetComponent<Rigidbody>().isKinematic = false;
+            currentItem = null;
         }
     }
 
-    public virtual void AddSlice(GameObject slice)
+    public virtual void AddItem(GameObject slice)
     {
-        if (currentSlice != null)
+        // If the drop zone is occupied, return the slice to the helper position
+        if (currentItem != null)
         {
             if (dropZoneController.GetEmptyDropZone() != null) {
-                dropZoneController.GetEmptyDropZone().AddSlice(currentSlice);
+                dropZoneController.GetEmptyDropZone().AddItem(currentItem);
             } else {
-                currentSlice.transform.position = removePosition; // TODO: this will be the helper position, where created slices will be placed
+                currentItem.transform.position = removePosition; // TODO: this will be the helper position, where created slices will be placed
             }
-            RemoveSlice();
+            RemoveItem();
         }
 
-        currentSlice = slice;
-        currentSlice.transform.SetParent(transform);
-        currentSlice.transform.localScale = Vector3.one;
-        currentSlice.transform.position = transform.position + offsetPosition;
-        currentSlice.transform.rotation = transform.rotation;
-        currentSlice.GetComponent<Rigidbody>().isKinematic = true;
+        currentItem = slice;
+        currentItem.transform.SetParent(transform);
+        currentItem.transform.localScale = Vector3.one;
+        currentItem.transform.position = transform.position + offsetPosition;
+        currentItem.transform.rotation = transform.rotation;
+        currentItem.GetComponent<Rigidbody>().isKinematic = true;
     }
 
     public void Highlight()

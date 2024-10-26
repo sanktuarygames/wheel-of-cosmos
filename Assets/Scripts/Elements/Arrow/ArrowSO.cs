@@ -4,6 +4,6 @@ using UnityEngine;
 public class ArrowSO : ScriptableObject
 {
     public string title = "";
-    public ArrowType type;
+    public ArrowType type = null;
     public Effect[] effects;
 }

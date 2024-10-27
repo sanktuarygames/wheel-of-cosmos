@@ -9,7 +9,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerInputController : MonoBehaviour
 {
-    public PlayerInputController instance { get; private set; }
     private Camera _camera;
     public bool IsPaused { get; set; }
     protected bool IsLeftClicking { get; set; }
@@ -18,26 +17,20 @@ public class PlayerInputController : MonoBehaviour
 
     protected void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        // #if UNITY_EDITOR
+        //     Cursor.visible = true;
+        //     Cursor.lockState = CursorLockMode.None;
+        // #endif
 
-        #if UNITY_EDITOR
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        #endif
+        // #if UNITY_STANDALONE_WIN
+        //     Cursor.visible = true;
+        //     Cursor.lockState = CursorLockMode.Confined;
+        // #endif
 
-        #if UNITY_STANDALONE_WIN
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Confined;
-        #endif
-
-        #if UNITY_ANDROID
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Confined;
-        #endif
+        // #if UNITY_ANDROID_STANDALONE
+        //     Cursor.visible = false;
+        //     Cursor.lockState = CursorLockMode.Confined;
+        // #endif
 
         playerInput = GetComponent<PlayerInput>();
 

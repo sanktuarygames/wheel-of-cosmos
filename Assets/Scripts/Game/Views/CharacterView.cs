@@ -6,6 +6,8 @@ using TMPro;
 
 public class CharacterView : MonoBehaviour
 {
+    public GameObject characterTemplate;
+
     // There will be an adapter to control the displayables, as there will be a template for every character
     private Character character;
     public GameObject slicePrefab;
@@ -39,6 +41,12 @@ public class CharacterView : MonoBehaviour
     public GameObject sliceEditPanel;
     public GameObject inventoryPanel;
 
+    private Coroutine sliceEditDelay;
+
+    public float sliceEditTimeout = 0.25f;
+    private float sliceEditTimeoutCounter = 0.25f;
+    
+
     void Awake() {
         Interactor.instance.onGrabItem.AddListener(OnGrabItem);
         Interactor.instance.onDropItem.AddListener(OnDropItem);
@@ -49,7 +57,17 @@ public class CharacterView : MonoBehaviour
         Interactor.instance.onDropItem.RemoveListener(OnDropItem);
     }
 
-    
+    void Update() {
+        if (sliceEditTimeoutCounter > 0) {
+            sliceEditTimeoutCounter -= Time.deltaTime;
+        } else {
+            sliceEditTimeoutCounter = sliceEditTimeout;
+            if (sliceEditDelay != null) {
+                StopCoroutine(sliceEditDelay);
+                sliceEditDelay = null;
+            }
+        }
+    }
     private void OnEnable() {
         LoadCharacter();
     }
@@ -108,7 +126,15 @@ public class CharacterView : MonoBehaviour
     private void OnGrabItem(GameObject item) {
         if (item.GetComponent<Slice>() != null) {
             Slice slice = item.GetComponent<Slice>();
-            ShowSliceEdit(slice);
+            // if (sliceEditDelay != null) StopCoroutine(sliceEditDelay);
+            // sliceEditDelay = StartCoroutine(ToggleSliceEditDelay("ShowEditSlice"));
+
+            Animator charAnimator = characterTemplate.GetComponent<Animator>();
+            float currentTime = (charAnimator.GetCurrentAnimatorStateInfo(0).length - charAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime) * charAnimator.GetCurrentAnimatorStateInfo(0).speed;
+            charAnimator.Play("ShowEditSlice", 0, currentTime < 0 ? 0 : currentTime);
+
+            // characterTemplate.GetComponent<Animator>().SetTrigger("Show");
+            // characterTemplate.GetComponent<Animator>().PlayInFixedTime("Show");
         } else if (item.GetComponent<Arrow>() != null) {
             // We could highlight the dropzones here
             Arrow arrow = item.GetComponent<Arrow>();
@@ -119,7 +145,17 @@ public class CharacterView : MonoBehaviour
     private void OnDropItem(GameObject item) {
         if (item.GetComponent<Slice>() != null) {
             Slice slice = item.GetComponent<Slice>();
-            ShowSliceEdit(slice);
+            if (sliceEditDelay != null) StopCoroutine(sliceEditDelay);
+            sliceEditDelay = StartCoroutine(ToggleSliceEditDelay("HideEditSlice"));
+
+            Animator charAnimator = characterTemplate.GetComponent<Animator>();
+            float currentTime = (charAnimator.GetCurrentAnimatorStateInfo(0).length - charAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime) * charAnimator.GetCurrentAnimatorStateInfo(0).speed;
+            charAnimator.Play("HideEditSlice", 0, currentTime < 0 ? 0 : currentTime);
+
+            // Animator charAnimator = characterTemplate.GetComponent<Animator>();
+            // charAnimator.Play("HideEditSlice",0, charAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime/2);
+
+            // characterTemplate.GetComponent<Animator>().SetTrigger("Hide", layer);
         } else if (item.GetComponent<Arrow>() != null) {
             // We could hide the highlight of the dropzones here
             Arrow arrow = item.GetComponent<Arrow>();
@@ -127,9 +163,19 @@ public class CharacterView : MonoBehaviour
         }
     }
     public void ShowSliceEdit(Slice slice) {
-        if (slice == null) return;
-        sliceEditPanel.SetActive(true);
-        inventoryPanel.SetActive(false);
+        Debug.Log("Showing slice edit");
+        // if (slice == null) return;
+        StartCoroutine(ToggleSliceEditDelay("ShowEditSlice"));
+        // sliceEditPanel.SetActive(true);
+        // inventoryPanel.SetActive(false);
+        
+    }
+
+    IEnumerator ToggleSliceEditDelay(string animation) {
+        yield return new WaitForSeconds(0.25f);
+        Animator charAnimator = characterTemplate.GetComponent<Animator>();
+        charAnimator.Play(animation, 0, charAnimator.GetCurrentAnimatorStateInfo(0).length - (charAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime * charAnimator.GetCurrentAnimatorStateInfo(0).speed));
+        sliceEditDelay = null;
     }
 
     public void ShowInventory() {
@@ -138,6 +184,7 @@ public class CharacterView : MonoBehaviour
     }
 
     public void Spin() {
+        displayWheel.GetComponentInChildren<WheelController>().Spin();
 
     }
 

@@ -48,11 +48,10 @@ public class Interactor : MonoBehaviour
                     if (grabbableItem != null)
                     {
                         // Grab
-                        Debug.Log(hit.collider.gameObject.name);
                         selectedObject = hit.collider.gameObject;
+                        onGrabItem.Invoke(selectedObject);
                         Cursor.visible = false;
                         grabbableItem.Grab();
-                        onGrabItem.Invoke(selectedObject);
                     }
                 }
             } else {
@@ -66,9 +65,9 @@ public class Interactor : MonoBehaviour
                 {
                     // Drop
                     grabbableItem.Drop();
+                    onDropItem.Invoke(selectedObject);
                     selectedObject = null;
                     Cursor.visible = true;
-                    onDropItem.Invoke(selectedObject);
                 }
             }
         }

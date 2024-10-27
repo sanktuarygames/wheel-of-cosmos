@@ -229,8 +229,8 @@ GameObject:
   - component: {fileID: 2804565397608431786}
   - component: {fileID: 7933078932450036406}
   - component: {fileID: 560862201407970736}
-  - component: {fileID: 842690278644267501}
   - component: {fileID: 4172104136791187466}
+  - component: {fileID: -7815988769638350224}
   - component: {fileID: 1925857049462383502}
   m_Layer: 8
   m_Name: Slice
@@ -328,25 +328,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7387706064836869012, guid: 1aa287530e2c15e4884ac270656ee16d, type: 3}
---- !u!114 &842690278644267501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7090729820880342221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3892a0d97ad6bbf42be5e984eabd6b4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGrabbed: 0
-  xGrabBoundaries: {x: -15, y: 20}
-  yGrabBoundaries: {x: 0, y: 7.5}
-  zGrabBoundaries: {x: -8, y: 8}
-  closestPosition: {fileID: 0}
-  positionMaxDistance: 15
-  dropZoneTag: SliceDropZone
 --- !u!54 &4172104136791187466
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -374,6 +355,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &-7815988769638350224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7090729820880342221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1273b80804ed1084f87e1400985b1271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrabbed: 0
+  dragForce: 40
+  offsetGrabPosition: {x: 0, y: 0, z: 5}
+  xGrabBoundaries: {x: -15, y: 20}
+  yGrabBoundaries: {x: 0, y: 7.5}
+  zGrabBoundaries: {x: -8, y: 8}
+  currentPosition: {fileID: 0}
+  positionMaxDistance: 20
+  dropZoneTag: SliceDropZone
 --- !u!114 &1925857049462383502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,6 +389,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sliceSO: {fileID: 11400000, guid: e871a0f92516ac94e8e7ed88714c99e9, type: 2}
+  currentValue: 0
+  currentType: {fileID: 0}
+  currentEffect: {fileID: 0}
   meshRenderer: {fileID: 7933078932450036406}
   titleText: {fileID: 9171233820421108501}
   valueText: {fileID: 6693027594523529382}

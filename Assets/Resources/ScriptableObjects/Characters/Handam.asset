@@ -15,7 +15,7 @@ MonoBehaviour:
   code: handam
   displayName: Handam
   description: The Parasyte
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ef754a4b3cfe44c4eb4f7a729ea6c042, type: 3}
   initialWheel: {fileID: 11400000, guid: 2d6921f893ac46c4da2f1710557c57e9, type: 2}
   initialArrows: []
   initialInventory: {fileID: 0}

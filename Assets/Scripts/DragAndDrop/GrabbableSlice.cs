@@ -4,15 +4,22 @@ public class GrabbableSlice : Grabbable
 {
     
     [Header("Position Properties")]
-    public DropZone currentPosition = null;
+    // public DropZone currentPosition = null;
     public float positionMaxDistance = 20f;
     public string dropZoneTag = "SliceDropZone";
-    DropZoneController dropZoneController;
+    // DropZoneController dropZoneController;
+    GameObject[] dropZoneObjects;
+    DropZone closestDropZone;
+    DropZone initialDropZone;
+
 
     public override void Start()
     {
         base.Start();
-        dropZoneController = GameObject.FindWithTag(dropZoneTag).GetComponent<DropZoneController>();
+        initialDropZone = transform.parent.GetComponent<DropZone>();
+        dropZoneObjects = GameObject.FindGameObjectsWithTag(dropZoneTag);
+
+        // dropZoneController = GameObject.FindWithTag(dropZoneTag).GetComponent<DropZoneController>();
     }
 
     public override void Update()
@@ -20,29 +27,42 @@ public class GrabbableSlice : Grabbable
         base.Update();
         if (isGrabbed)
         {
-            dropZoneController.HighlightClosestDropZone(transform.position);
+            float nearestDistance = Mathf.Infinity;
+            Debug.Log(dropZoneObjects.Length);
+            foreach (GameObject dropZone in dropZoneObjects)
+            {
+                float currentDistance = Vector3.Distance(transform.position, dropZone.transform.position);
+                if (currentDistance < nearestDistance)
+                {
+                    Debug.Log("Closest drop zone");
+                    closestDropZone = dropZone.GetComponent<DropZone>();
+                    Debug.Log(closestDropZone.name);
+                    nearestDistance = currentDistance;
+                    closestDropZone.Highlight();
+                }
+            }
         }
     }
 
     public override void Drop()
     {
         base.Drop();
-        currentPosition = dropZoneController?.GetClosestDropZone(transform.position);
-        if (currentPosition != null)
+        if (closestDropZone != null)
         {
-            currentPosition.Unhighlight();
-            currentPosition.AddItem(gameObject);
+            closestDropZone.Unhighlight();
+            closestDropZone.AddItem(gameObject);
         }
     }
 
     public override void Grab()
     {
         base.Grab();
+        initialDropZone = transform.parent.GetComponent<DropZone>();
 
-        if (currentPosition != null)
+        if (initialDropZone != null)
         {
-            currentPosition.RemoveItem();
-            currentPosition = null;
+            initialDropZone.RemoveItem();
+            initialDropZone = null;
         }
     }
 }

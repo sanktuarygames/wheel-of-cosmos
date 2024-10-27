@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62f718ee036035a4b8481a4e464b02b3, type: 3}
   m_Name: StellarMony1
   m_EditorClassIdentifier: 
-  title: STL
-  description: Robas ExKyr
+  title: ACTIVATE SKYR
+  description: Digestion
   initialValue: 1
   maxValue: 3
-  type: {fileID: 11400000, guid: 007619efed29fda47ba5153c01feadd2, type: 2}
+  type: {fileID: 11400000, guid: 5c6475dc7a3e2c1449a52bb22b648c23, type: 2}
   effect: {fileID: 0}

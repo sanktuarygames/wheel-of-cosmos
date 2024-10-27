@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: BobbLeGun
   m_EditorClassIdentifier: 
   code: bobb
-  displayName: Bobb Le Gun
+  displayName: Bobb LeGun
   description: The Revolutionary
-  initialWheel: {fileID: 11400000, guid: 9472690139739ef49a77ce14a93307d2, type: 2}
+  icon: {fileID: 0}
+  initialWheel: {fileID: 11400000, guid: b5a3191413876d24d801a7b112cf53c0, type: 2}
   initialArrows: []
   initialInventory: {fileID: 0}
-  initialHealth: 15
-  initialMaxHealth: 15
+  initialHealth: 20
+  initialMaxHealth: 20
   initialArmor: 0
-  initialMaxArmor: 0
+  initialMaxArmor: 10
   effects: []

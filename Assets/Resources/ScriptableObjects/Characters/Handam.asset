@@ -15,11 +15,12 @@ MonoBehaviour:
   code: handam
   displayName: Handam
   description: The Parasyte
-  initialWheel: {fileID: 11400000, guid: 9472690139739ef49a77ce14a93307d2, type: 2}
+  icon: {fileID: 0}
+  initialWheel: {fileID: 11400000, guid: 2d6921f893ac46c4da2f1710557c57e9, type: 2}
   initialArrows: []
   initialInventory: {fileID: 0}
-  initialHealth: 15
-  initialMaxHealth: 15
+  initialHealth: 5
+  initialMaxHealth: 5
   initialArmor: 0
-  initialMaxArmor: 0
+  initialMaxArmor: 10
   effects: []

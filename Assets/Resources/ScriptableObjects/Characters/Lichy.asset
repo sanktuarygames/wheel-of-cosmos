@@ -15,11 +15,12 @@ MonoBehaviour:
   code: lichy
   displayName: Lichy
   description: The Immortal
-  initialWheel: {fileID: 11400000, guid: 9472690139739ef49a77ce14a93307d2, type: 2}
+  icon: {fileID: 0}
+  initialWheel: {fileID: 11400000, guid: 7af0a91a7ba842f4e9c61a1cccd20d2c, type: 2}
   initialArrows: []
   initialInventory: {fileID: 0}
-  initialHealth: 15
-  initialMaxHealth: 15
+  initialHealth: 9
+  initialMaxHealth: 9
   initialArmor: 0
-  initialMaxArmor: 0
+  initialMaxArmor: 10
   effects: []

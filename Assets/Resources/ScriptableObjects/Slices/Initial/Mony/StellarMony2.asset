@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62f718ee036035a4b8481a4e464b02b3, type: 3}
   m_Name: StellarMony2
   m_EditorClassIdentifier: 
-  title: KEEP
-  description: Mantienes 1 Fortun
+  title: CHANGE SKYR BET
+  description: Gloton
   initialValue: 1
   maxValue: 3
   type: {fileID: 11400000, guid: 5c6475dc7a3e2c1449a52bb22b648c23, type: 2}

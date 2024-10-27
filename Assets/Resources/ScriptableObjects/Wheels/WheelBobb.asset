@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb5bd16a9ce735646bac632d36ee52a0, type: 3}
+  m_Name: WheelBobb
+  m_EditorClassIdentifier: 
+  initialArrows:
+  - {fileID: 11400000, guid: ab8a8c080d602824a84046ac8780479e, type: 2}
+  initialSlices:
+  - {fileID: 11400000, guid: f12741a661c5bcf4f9b952b01abc1b25, type: 2}
+  - {fileID: 11400000, guid: 8b0da8bbdfe2cd346b58a1c9f9bc2c2d, type: 2}
+  - {fileID: 11400000, guid: 8127fe3bf95cd534397b735214ab6d87, type: 2}
+  - {fileID: 11400000, guid: 6ff250465af419842af751597d144412, type: 2}
+  - {fileID: 11400000, guid: b51ddb65c1b3a324dbc44615eb0fc211, type: 2}
+  - {fileID: 11400000, guid: 670ec4b3359311845ac7b68ee729ad31, type: 2}

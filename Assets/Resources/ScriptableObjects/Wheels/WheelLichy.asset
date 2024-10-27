@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb5bd16a9ce735646bac632d36ee52a0, type: 3}
+  m_Name: WheelLichy
+  m_EditorClassIdentifier: 
+  initialArrows:
+  - {fileID: 11400000, guid: ab8a8c080d602824a84046ac8780479e, type: 2}
+  initialSlices:
+  - {fileID: 11400000, guid: 264c6a4defe977b4491e600ccbecfefd, type: 2}
+  - {fileID: 11400000, guid: 7087e0a6a5d41104a817bbcaad9f8ba6, type: 2}
+  - {fileID: 11400000, guid: 37be373d033988c40a10a05fccfd17b1, type: 2}
+  - {fileID: 11400000, guid: 56576cd8779ba134b96b5d793e13d4b8, type: 2}
+  - {fileID: 11400000, guid: 876a615b4465f4e47845e272b8a8e27d, type: 2}

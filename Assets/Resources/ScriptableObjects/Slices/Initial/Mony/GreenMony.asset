@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62f718ee036035a4b8481a4e464b02b3, type: 3}
   m_Name: GreenMony
   m_EditorClassIdentifier: 
-  title: RVL
-  description: 'Revelas 1 aventura '
+  title: PV
+  description: Heal
   initialValue: 1
-  maxValue: 3
-  type: {fileID: 11400000, guid: 007619efed29fda47ba5153c01feadd2, type: 2}
+  maxValue: 6
+  type: {fileID: 11400000, guid: f70db0149acae44488cda0e6783e1a32, type: 2}
   effect: {fileID: 0}

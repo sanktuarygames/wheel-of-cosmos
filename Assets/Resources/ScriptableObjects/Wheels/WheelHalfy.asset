@@ -15,8 +15,8 @@ MonoBehaviour:
   initialArrows:
   - {fileID: 11400000, guid: ab8a8c080d602824a84046ac8780479e, type: 2}
   initialSlices:
-  - {fileID: 11400000, guid: 4aadab1c7dc04104ea31c756bc6056e2, type: 2}
-  - {fileID: 11400000, guid: e871a0f92516ac94e8e7ed88714c99e9, type: 2}
-  - {fileID: 11400000, guid: e871a0f92516ac94e8e7ed88714c99e9, type: 2}
-  - {fileID: 11400000, guid: 6607e29fa1fa3fc41aee99c62c02850c, type: 2}
-  - {fileID: 11400000, guid: 7c23159b8bcdefb4da501685b6b15dfa, type: 2}
+  - {fileID: 11400000, guid: 4b5e84dd45a3eac4d8ccc388440313fc, type: 2}
+  - {fileID: 11400000, guid: 8241ef94facaa8441866e2c0adc73421, type: 2}
+  - {fileID: 11400000, guid: 94d0018948d74c6449119b62a56c5197, type: 2}
+  - {fileID: 11400000, guid: 8241ef94facaa8441866e2c0adc73421, type: 2}
+  - {fileID: 11400000, guid: 8203270c422a61f41b9c74689eecaeb9, type: 2}

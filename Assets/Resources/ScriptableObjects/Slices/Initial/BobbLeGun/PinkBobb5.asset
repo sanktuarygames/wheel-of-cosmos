@@ -15,6 +15,6 @@ MonoBehaviour:
   title: RGBHit
   description: Hace el efecto de las ExKyr invertidas
   initialValue: 1
-  maxValue: 3
+  maxValue: 12
   type: {fileID: 11400000, guid: 007619efed29fda47ba5153c01feadd2, type: 2}
   effect: {fileID: 0}

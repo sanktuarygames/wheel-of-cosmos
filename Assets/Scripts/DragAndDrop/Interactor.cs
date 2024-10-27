@@ -5,15 +5,15 @@ using UnityEngine.Events;
 [RequireComponent(typeof(PlayerInputController))]
 public class Interactor : MonoBehaviour
 {
-    public Interactor instance;
+    public static Interactor instance { get; private set; }
 
     [Header("Grab Properties")]
     public LayerMask grabLayerMask;
     private GameObject selectedObject;
     [SerializeField] PlayerInputController playerInputController = null;
-    private UnityEvent<GameObject> onGrabItem;
+    [HideInInspector] public UnityEvent<GameObject> onGrabItem;
     public UnityEvent<GameObject> OnGrabItem => onGrabItem;
-    private UnityEvent<GameObject> onDropItem;
+    [HideInInspector] public UnityEvent<GameObject> onDropItem;
     public UnityEvent<GameObject> OnDropItem => onDropItem;
 
     void Awake()
@@ -52,6 +52,7 @@ public class Interactor : MonoBehaviour
                         selectedObject = hit.collider.gameObject;
                         Cursor.visible = false;
                         grabbableItem.Grab();
+                        onGrabItem.Invoke(selectedObject);
                     }
                 }
             } else {
@@ -67,6 +68,7 @@ public class Interactor : MonoBehaviour
                     grabbableItem.Drop();
                     selectedObject = null;
                     Cursor.visible = true;
+                    onDropItem.Invoke(selectedObject);
                 }
             }
         }

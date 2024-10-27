@@ -5,6 +5,13 @@ public class SliceEditView : MonoBehaviour
 {
     // Uses
     public Slice editSlice;
+    [SerializeField] private CharacterView characterView;
+
+    void OnEnable()
+    {
+        // This should call the WheelViewMaster to show the slice edit view
+        editSlice = characterView.editSlice;
+    }
 
     public void ChangeSliceType(SliceType newType)
     {

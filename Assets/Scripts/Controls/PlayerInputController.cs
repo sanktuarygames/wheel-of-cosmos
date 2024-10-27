@@ -23,6 +23,22 @@ public class PlayerInputController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        #if UNITY_EDITOR
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        #endif
+
+        #if UNITY_STANDALONE_WIN
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        #endif
+
+        #if UNITY_ANDROID
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+        #endif
+
         playerInput = GetComponent<PlayerInput>();
 
         PlayerInputActions playerInputActions = new PlayerInputActions();
@@ -32,17 +48,6 @@ public class PlayerInputController : MonoBehaviour
         playerInputActions.Player.LeftClick.canceled += OnLeftClick;
         playerInputActions.Player.RightClick.canceled += OnRightClick;
         _camera = Camera.main;
-
-        #if UNITY_STANDALONE_WIN
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
-        #endif
-
-        #if UNITY_ANDROID
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
-        #endif
-
     }
 
     #region Methods called by unity input events

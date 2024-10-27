@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb5bd16a9ce735646bac632d36ee52a0, type: 3}
+  m_Name: WheelMony
+  m_EditorClassIdentifier: 
+  initialArrows:
+  - {fileID: 11400000, guid: ab8a8c080d602824a84046ac8780479e, type: 2}
+  initialSlices:
+  - {fileID: 11400000, guid: 1e3083fca8c9e4a45a456f922676b17c, type: 2}
+  - {fileID: 11400000, guid: 38b1a6dbc43764d46a3b57bc85bc382f, type: 2}
+  - {fileID: 11400000, guid: c1443264f732b374397931f769db856d, type: 2}
+  - {fileID: 11400000, guid: b789a82e1bdea264da5276d4669f530d, type: 2}
+  - {fileID: 11400000, guid: beffa7040e93be449b385e690155f849, type: 2}
+  - {fileID: 11400000, guid: f5b80862505ecba4ba4948b227e7ba66, type: 2}

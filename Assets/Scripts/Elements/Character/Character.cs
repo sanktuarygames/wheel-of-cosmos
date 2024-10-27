@@ -6,7 +6,7 @@ public class Character : MonoBehaviour
     public string code;
     public string characterName;
     [SerializeField]
-    private CharacterSO characterSO;
+    public CharacterSO characterSO;
     public Wheel wheel;
     public Inventory inventory;
 
@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
     private void LoadData()
     {
         code = characterSO.code;
-        characterName = characterSO.name;
+        characterName = characterSO.displayName;
         currentHealth = characterSO.initialHealth;
         currentMaxHealth = characterSO.initialMaxHealth;
         currentArmor = characterSO.initialArmor;

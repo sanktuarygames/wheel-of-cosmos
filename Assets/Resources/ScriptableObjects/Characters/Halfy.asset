@@ -15,7 +15,7 @@ MonoBehaviour:
   code: halfy
   displayName: Halfy
   description: The Bakunuki
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 737443472712c0b489af93a6d6078dd5, type: 3}
   initialWheel: {fileID: 11400000, guid: 9472690139739ef49a77ce14a93307d2, type: 2}
   initialArrows: []
   initialInventory: {fileID: 0}

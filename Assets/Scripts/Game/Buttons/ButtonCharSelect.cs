@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class ButtonCharSelect : MonoBehaviour, IInteractable
 {
-    private bool isSelected = false;
+    public bool isSelected = true;
     public string characterCode;
     public Material selectedMaterial;
     public Material unselectedMaterial;
@@ -15,19 +15,17 @@ public class ButtonCharSelect : MonoBehaviour, IInteractable
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        meshRenderer.material = unselectedMaterial;
+        SelectCharacter();
     }
 
     public void SelectCharacter()
     {
-        if (isSelected)
+        if (!isSelected)
         {
             meshRenderer.material = unselectedMaterial;
-            isSelected = false;
             gameSetupView.RemoveCharacter(characterCode);
         } else {
             meshRenderer.material = selectedMaterial;
-            isSelected = true;
             gameSetupView.AddCharacter(characterCode);
 
         }
@@ -35,6 +33,7 @@ public class ButtonCharSelect : MonoBehaviour, IInteractable
 
     public virtual void Interact(GameObject interactor = null)
     {
+        isSelected = !isSelected;
         SelectCharacter();
     }
 }

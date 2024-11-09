@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Deprecated/Demo.unity
     guid: faffc196bcb1ff34f968c0612ac49b84
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Deprecated/Demo 1.unity
     guid: bfc41fad38e11c144baab1ba9ebd605b
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 53a78fedaa4e3354fa487edc0b8cf96d
   m_configObjects: {}

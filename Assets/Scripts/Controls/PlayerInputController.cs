@@ -63,12 +63,16 @@ public class PlayerInputController : MonoBehaviour
     /// <param name="value"> The value of the input </param>
     public void OnRightClick(InputAction.CallbackContext context)
     {
-        IsRightClicking = context.performed;
         if (context.performed)
         {
-            // onRightClickEvent.Invoke(IsRightClicking);
-        } else if (context.canceled)
+            // Right-click was pressed
+            IsRightClicking = true;
+            onRightClickEvent.Invoke(IsRightClicking);
+        }
+        else if (context.canceled)
         {
+            // Right-click was released
+            IsRightClicking = false;
             onRightClickEvent.Invoke(IsRightClicking);
         }
     }
@@ -79,18 +83,17 @@ public class PlayerInputController : MonoBehaviour
     /// <param name="value"> The value of the input </param>
     public void OnLeftClick(InputAction.CallbackContext context)
     {
-        IsLeftClicking = context.canceled;
         if (context.performed)
         {
-            // Debug.Log("Left click invoke");
-            // Debug.Log(IsLeftClicking);
-            onLeftClickEvent.Invoke(true);
-        } else if (context.canceled)
-        {
+            // Left-click was pressed
+            IsLeftClicking = true;
             onLeftClickEvent.Invoke(IsLeftClicking);
-            // Debug.Log("Left click canceled");
-            // Debug.Log(!IsLeftClicking);
-            onLeftClickEvent.Invoke(false);
+        }
+        else if (context.canceled)
+        {
+            // Left-click was released
+            IsLeftClicking = false;
+            onLeftClickEvent.Invoke(IsLeftClicking);
         }
     }
 

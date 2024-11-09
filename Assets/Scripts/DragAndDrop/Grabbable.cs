@@ -86,6 +86,7 @@ public class Grabbable : MonoBehaviour, IGrabbable
 
     public virtual void Drop()
     {
+        Cursor.visible = true;
         rb.velocity = Vector3.zero;
         rb.isKinematic = true;
         isGrabbed = false;
@@ -93,6 +94,7 @@ public class Grabbable : MonoBehaviour, IGrabbable
 
     public virtual void Grab()
     {
+        Cursor.visible = false;
         isGrabbed = true;
         rb.isKinematic = false;
     }

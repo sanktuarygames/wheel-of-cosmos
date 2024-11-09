@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class DropZoneController : MonoBehaviour
 {
-    public DropZone[] dropZones;
+    public string dropZoneTag;
+    public List<DropZone> dropZones;
     public bool isFrozen = true;
 
 
     void Awake()
     {
-        dropZones = new DropZone[transform.childCount];
+        dropZones = new List<DropZone>();
+        GameObject[] dropZoneObjects = GameObject.FindGameObjectsWithTag(dropZoneTag);
         for (int i = 0; i < transform.childCount; i++)
         {
             dropZones[i] = transform.GetChild(i).GetComponent<DropZone>();

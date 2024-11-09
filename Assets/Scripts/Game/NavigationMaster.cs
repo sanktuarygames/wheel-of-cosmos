@@ -35,6 +35,11 @@ public class NavigationMaster : MonoBehaviour
         // DontDestroyOnLoad(gameObject);
     }
 
+    private void Start()
+    {
+        ShowView(View.MainMenu);
+    }
+
     public void ShowView(View view)
     {
         switch (view)

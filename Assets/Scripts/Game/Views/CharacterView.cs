@@ -35,6 +35,7 @@ public class CharacterView : MonoBehaviour
     [Header("Wheel Management")]
     public DropZoneController arrowPositions;
     public DropZoneController slicePositions;
+    public Transform wheelParent;
 
     [Header("Item Management")]
     public Slice editSlice;
@@ -48,13 +49,13 @@ public class CharacterView : MonoBehaviour
     
 
     void Awake() {
-        Interactor.instance.onGrabItem.AddListener(OnGrabItem);
-        Interactor.instance.onDropItem.AddListener(OnDropItem);
+        // Interactor.instance.onGrabItem.AddListener(OnGrabItem);
+        // Interactor.instance.onDropItem.AddListener(OnDropItem);
     }
 
     void OnDestroy() {
-        Interactor.instance.onGrabItem.RemoveListener(OnGrabItem);
-        Interactor.instance.onDropItem.RemoveListener(OnDropItem);
+        // Interactor.instance.onGrabItem.RemoveListener(OnGrabItem);
+        // Interactor.instance.onDropItem.RemoveListener(OnDropItem);
     }
 
     void Update() {
@@ -72,7 +73,7 @@ public class CharacterView : MonoBehaviour
         LoadCharacter();
     }
     public void LoadCharacter() {
-        character = GameMaster.Instance.currentCharacter;
+        character = GameMaster.Instance?.currentCharacter;
         if (character == null) return;
         characterName.text = character.characterName;
         characterImage.sprite = character.characterSO.icon;
@@ -82,25 +83,44 @@ public class CharacterView : MonoBehaviour
         maxArmor.text = character.currentMaxArmor.ToString();
         wheel = character.wheel;
         inventory = character.inventory;
-        LoadWheel();
+        // LoadWheel();
+        LoadNewWheel();
+    }
+
+    private void LoadNewWheel() {
+        Debug.Log("Loading wheel");
+        Debug.Log(wheelParent.childCount);
+        for(int i = 0; i < wheelParent.childCount; i++) {
+            Transform slicePosition = wheelParent.GetChild(i);
+            if (slicePosition.transform.childCount > 0) {
+                Destroy(slicePosition.transform.GetChild(0).gameObject);
+            }
+
+            if (wheel.currentSlices[i] != null) {
+                GameObject newSlice = Instantiate(slicePrefab, slicePosition.transform);
+                newSlice.GetComponent<Slice>().Initialize(wheel.currentSlices[i].sliceSO);
+                newSlice.name = newSlice.GetComponent<Slice>().currentType.typeName + " - " + newSlice.GetComponent<Slice>().currentValue;
+                newSlice.GetComponent<Slice>().UpdateDisplay();
+            }
+        }
     }
 
     private void LoadWheel() {
         Debug.Log("Loading wheel");
         int i = 0;
-            foreach(DropZone dropZone in slicePositions.dropZones) {
-                if (dropZone.transform.childCount > 0) {
-                    Destroy(dropZone.transform.GetChild(0).gameObject);
-                }
-
-                if (wheel.currentSlices[i] != null) {
-                    GameObject newSlice = Instantiate(slicePrefab, dropZone.transform);
-                    newSlice.GetComponent<Slice>().Initialize(wheel.currentSlices[i].sliceSO);
-                    newSlice.name = newSlice.GetComponent<Slice>().currentType.typeName + " - " + newSlice.GetComponent<Slice>().currentValue;
-                    newSlice.GetComponent<Slice>().UpdateDisplay();
-                }
-                i++;
+        foreach(DropZone dropZone in slicePositions.dropZones) {
+            if (dropZone.transform.childCount > 0) {
+                Destroy(dropZone.transform.GetChild(0).gameObject);
             }
+
+            if (wheel.currentSlices[i] != null) {
+                GameObject newSlice = Instantiate(slicePrefab, dropZone.transform);
+                newSlice.GetComponent<Slice>().Initialize(wheel.currentSlices[i].sliceSO);
+                newSlice.name = newSlice.GetComponent<Slice>().currentType.typeName + " - " + newSlice.GetComponent<Slice>().currentValue;
+                newSlice.GetComponent<Slice>().UpdateDisplay();
+            }
+            i++;
+        }
     
         i = 0;
         foreach(DropZone dropZone in arrowPositions.dropZones) {

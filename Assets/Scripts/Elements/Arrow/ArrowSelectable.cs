@@ -3,7 +3,6 @@ using UnityEngine;
 public class ArrowSelectable : Selectable
 {
     [Header("Arrow Properties")]
-    public Arrow currentArrow;
     public ArrowDisplay arrowDisplay;
 
     [Header("Selection Render Properties")]
@@ -13,16 +12,6 @@ public class ArrowSelectable : Selectable
     void Start()
     {
         arrowDisplay = GetComponent<ArrowDisplay>();
-    }
-    
-    public void LoadDisplay() {
-        if (currentArrow == null) return;
-        LoadArrow(currentArrow);
-    }
-
-    public void LoadArrow(Arrow arrow) {
-        this.currentArrow = arrow;
-        arrowDisplay.SetupDisplay(arrow);
     }
 
     public override void Select(GameObject currentlySelectedObject = null)
@@ -45,13 +34,13 @@ public class ArrowSelectable : Selectable
         if (currentlySelectedArrowArsenal != null)
         {
             // We give the value of the arsenal arrow to the current arrow
-            LoadArrow(currentlySelectedArrowArsenal.currentArrow);
+            CharacterView.instance.AddArrowToWheel(arrowDisplay.currentArrow, currentlySelectedArrowArsenal.arrowDisplay.currentArrow);
         }
         // If another arrow from the wheel is selected
         else if (currentlySelectedArrowSelectable != null)
         {
-           GameMaster.Instance.currentCharacter.wheel.SwapArrows(currentlySelectedObject, gameObject);
-           // TODO: Update the wheel display to show the new arrow positions
+            // We swap the arrows
+            CharacterView.instance.SwapArrows(currentlySelectedArrowSelectable.arrowDisplay.currentArrow, arrowDisplay.currentArrow);
         }
     }
 }

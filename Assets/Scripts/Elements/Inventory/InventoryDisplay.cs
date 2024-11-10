@@ -44,12 +44,6 @@ public class InventoryDisplay : MonoBehaviour
         stellarArrows = 0;
         cursedArrows = 0;
         artificialArrows = 0;
-
-        Debug.Log("Arrow Display Count: " + arrowDisplay.Count);
-        foreach (ArrowDisplay display in arrowDisplay)
-        {
-            display.SetupDisplay();
-        }
     }
 
     public void UpdateDisplay() {
@@ -89,6 +83,8 @@ public class InventoryDisplay : MonoBehaviour
                 artificialArrows++;
                 artificialArrowsText.text = artificialArrows.ToString();
                 break;
+            case BaseType.Void:
+                break;
         }
     }
 
@@ -119,6 +115,8 @@ public class InventoryDisplay : MonoBehaviour
             case BaseType.Artificial:
                 artificialArrows--;
                 artificialArrowsText.text = artificialArrows.ToString();
+                break;
+            case BaseType.Void:
                 break;
         }
     }

@@ -5,20 +5,10 @@ using System.Collections.Generic;
 
 public class ArsenalDisplay : MonoBehaviour
 {
-    public static ArsenalDisplay instance { get; private set; }
     [Header("Arsenal")]
     public GameObject arsenalSlicePrefab;
     public List<SliceArsenal> arsenalSlices;
     public Transform arsenalSlicesParent;
-
-    private void Awake()
-    {
-        if (instance != this)
-        {
-            Destroy(this);
-        }
-        instance = this;
-    }
 
     void Start()
     {

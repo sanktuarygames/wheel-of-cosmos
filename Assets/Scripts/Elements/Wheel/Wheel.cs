@@ -34,6 +34,10 @@ public class Wheel : MonoBehaviour
         }
     }
 
+    public void AddArrow(Arrow arrow, int index) {
+        currentArrows[index] = arrow;
+    }
+
     public void RemoveArrow(Arrow arrow) {
         for (int i = 0; i < currentArrows.Length; i++) {
             if (currentArrows[i] == arrow) {
@@ -50,6 +54,10 @@ public class Wheel : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void AddSlice(Slice slice, int index) {
+        currentSlices[index] = slice;
     }
 
     public void RemoveSlice(Slice slice) {
@@ -93,6 +101,15 @@ public class Wheel : MonoBehaviour
         }
     }
 
+    public void DisableArrow(Arrow arrow) {
+        for (int i = 0; i < currentArrows.Length; i++) {
+            if (currentArrows[i] == arrow) {
+                currentArrows[i].Initialize(Resources.Load<ArrowSO>("ScriptableObjects/Arrows/Void"));
+                break;
+            }
+        }
+    }
+
     public int FindBySlice(Slice slice) {
         for (int i = 0; i < currentSlices.Length; i++) {
             if (currentSlices[i] == slice) {
@@ -111,21 +128,19 @@ public class Wheel : MonoBehaviour
         return -1;
     }
 
-    public void SwapSlices(GameObject initialSlice, GameObject finalSlice) {
-        Slice initial = initialSlice.GetComponent<SliceDisplay>().currentSlice;
-        Slice final = finalSlice.GetComponent<SliceDisplay>().currentSlice;
-        int initialIndex = FindBySlice(initial);
-        int finalIndex = FindBySlice(final);
-        currentSlices[initialIndex] = final;
-        currentSlices[finalIndex] = initial;
+    public void SwapSlices(Slice initialSlice, Slice finalSlice) {
+        Debug.Log("Swapping slices " + initialSlice + " " + finalSlice);
+        int initialIndex = FindBySlice(initialSlice);
+        int finalIndex = FindBySlice(finalSlice);
+        currentSlices[initialIndex] = finalSlice;
+        currentSlices[finalIndex] = initialSlice;
     }
 
-    public void SwapArrows(GameObject initialArrow, GameObject finalArrow) {
-        Arrow initial = initialArrow.GetComponent<ArrowDisplay>().currentArrow;
-        Arrow final = finalArrow.GetComponent<ArrowDisplay>().currentArrow;
-        int initialIndex = FindByArrow(initial);
-        int finalIndex = FindByArrow(final);
-        currentArrows[initialIndex] = final;
-        currentArrows[finalIndex] = initial;
+    public void SwapArrows(Arrow initialArrow, Arrow finalArrow) {
+        Debug.Log("Swapping arrows " + initialArrow + " " + finalArrow);
+        int initialIndex = FindByArrow(initialArrow);
+        int finalIndex = FindByArrow(finalArrow);
+        currentArrows[initialIndex] = finalArrow;
+        currentArrows[finalIndex] = initialArrow;
     }
 }

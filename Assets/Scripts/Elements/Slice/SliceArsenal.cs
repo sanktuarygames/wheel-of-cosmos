@@ -59,18 +59,11 @@ public class SliceArsenal : Selectable
         // If a slice from the wheel is selected
         if (currentlySelectedSlice != null)
         {
-            // Remove the slice from the wheel
-            GameMaster.Instance.currentCharacter.wheel.RemoveSlice(currentlySelectedSlice.slice);
-            // Find the slice in the arsenal list and lock it
-            GameMaster.Instance.currentCharacter.arsenal.LockSlice(slice);
-            // TODO: Update wheel and arsenal display
-                        
+            CharacterView.instance.ReturnSliceToArsenal(currentlySelectedSlice.sliceDisplay.currentSlice);
         }
         // If a slice from the arsenal is selected
         else if (currentlySelectedSliceArsenal != null) {
-            // Swap the positions of the two slices
-            GameMaster.Instance.currentCharacter.arsenal.SwapSlices(currentlySelectedObject, gameObject);
-            // TODO: Update the arsenal display
+            CharacterView.instance.SwapSlicesArsenal(currentlySelectedSliceArsenal.sliceDisplay.currentSlice, sliceDisplay.currentSlice);
         }
     }
 }

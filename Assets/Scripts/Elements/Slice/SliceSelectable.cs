@@ -11,22 +11,9 @@ public class SliceSelectable : Selectable
     public Slice slice;
     public SliceDisplay sliceDisplay;
 
-
     void Start()
     {
-    }
-
-    void Update()
-    {
-        if (isSelected)
-        {
-            // Display Effects
-        }
-    }
-
-    public void LoadSlice(Slice slice) {
-        this.slice = slice;
-        sliceDisplay.SetupDisplay(slice);
+        sliceDisplay = GetComponent<SliceDisplay>();
     }
 
     public override void Select(GameObject currentlySelectedObject = null)
@@ -55,23 +42,15 @@ public class SliceSelectable : Selectable
         // If a slice from the wheel is selected
         if (currentlySelectedSlice != null)
         {
-            GameMaster.Instance.currentCharacter.wheel.SwapSlices(currentlySelectedObject, gameObject);
-            // TODO: Update wheel display
-            
+            CharacterView.instance.SwapSlicesWheel(currentlySelectedSlice.sliceDisplay.currentSlice, sliceDisplay.currentSlice);            
         }
         // If a slice from the arsenal is selected
         else if (currentlySelectedSliceArsenal != null) {
-            // Get the slice data and load it here. May include animations and shit in the future
+            // Return this slice to the arsenal
+            CharacterView.instance.ReturnSliceToArsenal(sliceDisplay.currentSlice);
 
-            // Lock the slice in the arsenal
-            GameMaster.Instance.currentCharacter.arsenal.LockSlice(currentlySelectedSliceArsenal.slice);
-            
-            // Load the arsenal slice data in the selected slice
-
-            GameMaster.Instance.currentCharacter.wheel.ChangeSlice(slice, currentlySelectedSliceArsenal.slice);
-            GetComponent<SliceDisplay>().SetupDisplay(currentlySelectedSliceArsenal.slice);
-
-            // TODO: Update wheel and arsenal display
+            // Add the selected slice to the wheel
+            CharacterView.instance.AddSliceToWheel(currentlySelectedSliceArsenal.sliceDisplay.currentSlice);
         }
     }
 }

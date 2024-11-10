@@ -96,12 +96,10 @@ public class Arsenal : MonoBehaviour
         AddSlice(newSlice);
     }
 
-    public void SwapSlices(GameObject initialSlice, GameObject finalSlice) {
-        Slice initial = initialSlice.GetComponent<SliceDisplay>().currentSlice;
-        Slice final = finalSlice.GetComponent<SliceDisplay>().currentSlice;
-        int initialIndex = FindBySlice(initial);
-        int finalIndex = FindBySlice(final);
-        currentSlices[initialIndex] = final;
-        currentSlices[finalIndex] = initial;
+    public void SwapSlices(Slice initialSlice, Slice finalSlice) {
+        int initialIndex = FindBySlice(initialSlice);
+        int finalIndex = FindBySlice(finalSlice);
+        currentSlices[initialIndex] = finalSlice;
+        currentSlices[finalIndex] = initialSlice;
     }
 }

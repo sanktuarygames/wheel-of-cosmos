@@ -9,5 +9,6 @@ public enum BaseType
     Green,
     Artificial,
     Cursed,
-    Stellar
+    Stellar,
+    Void
 }

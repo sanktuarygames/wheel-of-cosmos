@@ -31,56 +31,65 @@ public class Selector : MonoBehaviour
         playerInputController.OnLeftClickEvent.AddListener(HandlePress);
     }
 
-    public void HandleSelect(GameObject gameObject) {
-        if (gameObject == null) return;
+    public void HandleSelect(GameObject selectedGameObject) {
+        if (selectedGameObject == null) return;
 
         if (currentSelectedObject == null)
         {
-            gameObject.GetComponent<ISelectable>().Select();
-            currentSelectedObject = gameObject;
+            selectedGameObject.GetComponent<ISelectable>().Select();
+            currentSelectedObject = selectedGameObject;
             onSelectItem.Invoke(currentSelectedObject);
-        } else if (currentSelectedObject == gameObject)
+        } else if (currentSelectedObject == selectedGameObject)
         {
             currentSelectedObject.GetComponent<ISelectable>().Unselect();
             onUnselectItem.Invoke(currentSelectedObject);
             currentSelectedObject = null;
         } else {
             if (currentSelectedObject.GetComponent<SliceSelectable>() != null){
-                if (gameObject.GetComponent<SliceArsenal>() != null || gameObject.GetComponent<SliceSelectable>() != null)
+                if (selectedGameObject.GetComponent<SliceArsenal>() != null || selectedGameObject.GetComponent<SliceSelectable>() != null)
                 {
                     currentSelectedObject.GetComponent<SliceSelectable>().Unselect();
-                    gameObject.GetComponent<SliceSelectable>().HandleInteraction(currentSelectedObject);
+                    selectedGameObject.GetComponent<SliceSelectable>().HandleInteraction(currentSelectedObject);
                     onUnselectItem.Invoke(currentSelectedObject);
                     currentSelectedObject = null;
                 } else {
-                    SelectNext(gameObject);
+                    SelectNext(selectedGameObject);
                 }
             } else if (currentSelectedObject.GetComponent<SliceArsenal>() != null){
-                if (gameObject.GetComponent<SliceArsenal>() != null || gameObject.GetComponent<SliceSelectable>() != null)
+                if (selectedGameObject.GetComponent<SliceArsenal>() != null || selectedGameObject.GetComponent<SliceSelectable>() != null)
                 {
                     currentSelectedObject.GetComponent<SliceArsenal>().Unselect();
-                    gameObject.GetComponent<SliceArsenal>().HandleInteraction(currentSelectedObject);
+                    selectedGameObject.GetComponent<SliceArsenal>().HandleInteraction(currentSelectedObject);
                     onUnselectItem.Invoke(currentSelectedObject);
                     currentSelectedObject = null;
                 } else {
-                    SelectNext(gameObject);
+                    SelectNext(selectedGameObject);
                 }
             } else if (currentSelectedObject.GetComponent<ArrowSelectable>() != null){
-                if (gameObject.GetComponent<ArrowArsenal>() != null || gameObject.GetComponent<ArrowSelectable>() != null)
+                if (selectedGameObject.GetComponent<ArrowArsenal>() != null || selectedGameObject.GetComponent<ArrowSelectable>() != null)
                 {
-                    currentSelectedObject.GetComponent<ArrowSelectable>().HandleInteraction(gameObject);
+                    currentSelectedObject.GetComponent<ArrowSelectable>().Unselect();
+                    if (selectedGameObject.GetComponent<ArrowArsenal>() != null)
+                    {
+                        selectedGameObject.GetComponent<ArrowArsenal>().HandleInteraction(currentSelectedObject);
+                    } else {
+                        selectedGameObject.GetComponent<ArrowSelectable>().HandleInteraction(currentSelectedObject);
+                    }
+                    onUnselectItem.Invoke(currentSelectedObject);
                     currentSelectedObject = null;
                 } else {
-                    SelectNext(gameObject);
+                    SelectNext(selectedGameObject);
                 }
             } else if (currentSelectedObject.GetComponent<ArrowArsenal>() != null) {
-                if (gameObject.GetComponent<ArrowSelectable>() != null)
+                if (selectedGameObject.GetComponent<ArrowSelectable>() != null)
                 {
-                    currentSelectedObject.GetComponent<ArrowArsenal>().HandleInteraction(gameObject);
+                    currentSelectedObject.GetComponent<ArrowArsenal>().Unselect();
+                    selectedGameObject.GetComponent<ArrowSelectable>().HandleInteraction(currentSelectedObject);
+                    onUnselectItem.Invoke(currentSelectedObject);
                     currentSelectedObject = null;
                 } 
                 else {
-                    SelectNext(gameObject);
+                    SelectNext(selectedGameObject);
                 }
             }
         }

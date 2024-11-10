@@ -25,7 +25,17 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddArrow(ArrowSO arrowSO)
+    // TODO: not working
+    public void AddArrow(Arrow arrow)
+    {   
+        Arrow newArrow = new GameObject("Arrow").AddComponent<Arrow>();
+        newArrow.LoadArrow(arrow);
+        newArrow.transform.SetParent(transform);
+        currentArrows.Add(arrow);
+        // not okay
+    }
+
+    public void AddArrowBySO(ArrowSO arrowSO)
     {
         Arrow newArrow = new GameObject("Arrow").AddComponent<Arrow>();
         newArrow.Initialize(arrowSO);
@@ -33,18 +43,21 @@ public class Inventory : MonoBehaviour
         currentArrows.Add(newArrow);
     }
 
+    // TODO: not working
     public void RemoveArrow(Arrow arrow)
     {
-        currentArrows.Remove(arrow);
-        Destroy(arrow.gameObject);
+        Arrow currentArrow = currentArrows.Find(a => a == arrow);
+        currentArrows.Remove(currentArrow);
+        // we should be destroying the arrows?
+        // Destroy(currentArrow.gameObject);
     }
 
     public void RemoveArrowBySO(ArrowSO arrowSO)
     {
-        Arrow arrow = currentArrows.Find(a => a.arrowSO == arrowSO);
-        if (arrow != null) {
-            currentArrows.Remove(arrow);
-            Destroy(arrow.gameObject);
+        Arrow currentArrow = currentArrows.Find(a => a.arrowSO == arrowSO);
+        if (currentArrow != null) {
+            currentArrows.Remove(currentArrow);
+            // Destroy(currentArrow.gameObject);
         }
     }
 }

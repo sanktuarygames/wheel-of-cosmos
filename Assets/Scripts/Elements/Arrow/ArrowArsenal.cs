@@ -11,6 +11,12 @@ public class ArrowArsenal : Selectable
     public Material highlightMaterial;
     public Material defaultMaterial;
 
+    void Start()
+    {
+        arrowDisplay = GetComponent<ArrowDisplay>();
+        arrowDisplay.SetupDisplay();
+    }
+
     public override void Select(GameObject currentlySelectedObject = null)
     {
         base.Select();
@@ -29,14 +35,9 @@ public class ArrowArsenal : Selectable
         ArrowSelectable currentlySelectedArrowSelectable = currentlySelectedObject.GetComponent<ArrowSelectable>();
 
         // Selected arrow arsenal will be used to swap positions in the future
-        
         if (currentlySelectedArrowSelectable != null)
         {
-            // We remove the arrow from the wheel
-            GameMaster.Instance.currentCharacter.wheel.RemoveArrow(currentlySelectedArrowSelectable.currentArrow);
-            // And we add it to the inventory
-            GameMaster.Instance.currentCharacter.inventory.AddArrow(currentlySelectedArrowSelectable.currentArrow.arrowSO);
-            // TODO: Update inventory and wheel display
+            CharacterView.instance.ReturnArrowToInventory(currentlySelectedArrowSelectable.arrowDisplay.currentArrow);
         }
     }
 }

@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialArrows:
   - {fileID: 11400000, guid: ab8a8c080d602824a84046ac8780479e, type: 2}
+  - {fileID: 11400000, guid: 39b93cff8b8da1a4a8231d7ac1e004b0, type: 2}
+  - {fileID: 11400000, guid: 39b93cff8b8da1a4a8231d7ac1e004b0, type: 2}
+  - {fileID: 11400000, guid: 39b93cff8b8da1a4a8231d7ac1e004b0, type: 2}
+  - {fileID: 11400000, guid: 39b93cff8b8da1a4a8231d7ac1e004b0, type: 2}
+  - {fileID: 11400000, guid: 39b93cff8b8da1a4a8231d7ac1e004b0, type: 2}
   initialSlices:
   - {fileID: 11400000, guid: 4b5e84dd45a3eac4d8ccc388440313fc, type: 2}
   - {fileID: 11400000, guid: 8241ef94facaa8441866e2c0adc73421, type: 2}

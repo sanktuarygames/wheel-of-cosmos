@@ -14,6 +14,11 @@ public class Arrow : MonoBehaviour {
         ChangeType(arrowSO.type);
     }
 
+    public void LoadArrow(Arrow arrow) {
+        ChangeType(arrow.currentType);
+        name = arrow.name;
+    }
+
 
     public void ChangeType(ArrowType newType) {
         currentType = newType;

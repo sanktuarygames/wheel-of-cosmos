@@ -6,6 +6,7 @@ public class ArrowDisplay : MonoBehaviour
     [Header("Arrow")]
     public Arrow currentArrow;
 
+    // Only used for inventory arrows. Remove in future TODO
     public void SetupDisplay() {
         currentArrow = GetComponent<Arrow>();
         GetComponent<MeshRenderer>().material = currentArrow.currentType.material;
@@ -17,8 +18,10 @@ public class ArrowDisplay : MonoBehaviour
     }
 
     public void SetDefaultDisplay() {
-        currentArrow = new Arrow();
-        currentArrow.Initialize(Resources.Load<ArrowSO>("ScriptableObjects/Types/Arrows/Normal"));
+        GetComponent<MeshRenderer>().material = currentArrow.arrowSO.type.material;
+    }
+
+    public void SetVoidDisplay() {
         GetComponent<MeshRenderer>().material = currentArrow.arrowSO.type.material;
     }
 

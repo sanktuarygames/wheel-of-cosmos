@@ -369,6 +369,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlightMaterial: {fileID: 2100000, guid: 8e1bf0ef12249b6429caf88a541a2348, type: 2}
   defaultMaterial: {fileID: 2100000, guid: c7b998041e91d464db83427168227d11, type: 2}
+  slice: {fileID: 0}
+  sliceDisplay: {fileID: 0}
 --- !u!114 &8149082576405644308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,6 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368fb3863daf0224f8cc2cd3f7767ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSlice: {fileID: 0}
   titleText: {fileID: 9171233820421108501}
   valueText: {fileID: 6693027594523529382}
 --- !u!1 &8572638268352987360

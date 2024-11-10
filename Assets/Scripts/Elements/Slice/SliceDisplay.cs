@@ -5,7 +5,6 @@ using TMPro;
 public class SliceDisplay : MonoBehaviour
 {
     [Header("Slice")]
-    private MeshRenderer meshRenderer;
     public Slice currentSlice;
 
     [Header("Display Properties")]

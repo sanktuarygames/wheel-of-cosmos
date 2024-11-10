@@ -7,6 +7,7 @@ using TMPro;
 public class CharacterView : MonoBehaviour
 {
     // public GameObject characterTemplate;
+    public static CharacterView instance { get; private set; }
 
     // There will be an adapter to control the displayables, as there will be a template for every character
     private Character character;
@@ -31,6 +32,7 @@ public class CharacterView : MonoBehaviour
     public WheelController wheelController;
     public WheelDisplay wheelDisplay;
     public InventoryDisplay inventoryDisplay;
+    public ArsenalDisplay arsenalDisplay;
 
     [Header("Main Panel Management")]
     public GameObject slicesArsenalPanel;
@@ -44,10 +46,13 @@ public class CharacterView : MonoBehaviour
     public GameObject sliceSelectedActionsPanel;
     public GameObject arrowSelectedActionsPanel;
 
-    private Coroutine sliceEditDelay;
 
-    public float sliceEditTimeout = 0.25f;
-    private float sliceEditTimeoutCounter = 0.25f;
+    void Awake() {
+        instance = this;
+        if (instance != this) {
+            Destroy(this);
+        }
+    }
     
 
     void OnEnable() {
@@ -67,18 +72,6 @@ public class CharacterView : MonoBehaviour
         HideSelectedItemActionsPanel();
     }
 
-    void Update() {
-        if (sliceEditTimeoutCounter > 0) {
-            sliceEditTimeoutCounter -= Time.deltaTime;
-        } else {
-            sliceEditTimeoutCounter = sliceEditTimeout;
-            if (sliceEditDelay != null) {
-                StopCoroutine(sliceEditDelay);
-                sliceEditDelay = null;
-            }
-        }
-    }
-
     public void LoadCharacter() {
         character = GameMaster.Instance?.currentCharacter;
         if (character == null) return;
@@ -93,6 +86,7 @@ public class CharacterView : MonoBehaviour
     }
 
     private void LoadWheel() {
+        Debug.Log("LoadWheel");
         wheelDisplay.SetupDisplay(character.wheel);
     }
 
@@ -131,11 +125,11 @@ public class CharacterView : MonoBehaviour
         ArrowArsenal arrowArsenal = Selector.instance.currentSelectedObject.GetComponent<ArrowArsenal>();
 
         if (arrowSelectable != null) {
-            character.inventory.AddArrow(arrowSelectable.GetComponent<ArrowDisplay>().currentArrow.arrowSO);
+            character.inventory.AddArrowBySO(arrowSelectable.GetComponent<ArrowDisplay>().currentArrow.arrowSO);
             inventoryDisplay.SetupDisplay(character.inventory);
         } else if (arrowArsenal != null) {
             Debug.Log("Added arrow to inventory" + arrowArsenal.GetComponent<ArrowDisplay>().currentArrow);
-            character.inventory.AddArrow(arrowArsenal.GetComponent<ArrowDisplay>().currentArrow.arrowSO);
+            character.inventory.AddArrowBySO(arrowArsenal.GetComponent<ArrowDisplay>().currentArrow.arrowSO);
             Debug.Log("Added arrow to inventory");
             Debug.Log(character.inventory.currentArrows.Count);
             inventoryDisplay.SetupDisplay(character.inventory);
@@ -208,4 +202,56 @@ public class CharacterView : MonoBehaviour
         wheelController.Spin();
     }
 
+    public void SwapSlicesWheel(Slice initialSlice, Slice finalSlice) {
+        character.wheel.SwapSlices(initialSlice, finalSlice);
+        wheelDisplay.SetupDisplay(character.wheel);
+    }
+
+    public void SwapSlicesArsenal(Slice initialSlice, Slice finalSlice) {
+        character.arsenal.SwapSlices(initialSlice, finalSlice);
+        arsenalDisplay.SetupDisplay(character.arsenal);
+    }
+
+    public void SwapArrows(Arrow initialArrow, Arrow finalArrow) {
+        Debug.Log("SwapArrows" + initialArrow + " - " + finalArrow);
+        character.wheel.SwapArrows(initialArrow, finalArrow);
+        wheelDisplay.SetupDisplay(character.wheel);
+    }
+
+    public void AddSliceToWheel(Slice slice, Slice nextSlice = null) {
+        if (nextSlice != null) {
+            character.wheel.AddSlice(nextSlice, character.wheel.FindBySlice(slice));
+        } else {
+            character.wheel.AddSlice(slice);
+        }
+        character.arsenal.LockSlice(slice);
+        wheelDisplay.SetupDisplay(character.wheel);
+        // arsenalDisplay.SetupDisplay(character.arsenal);
+    }
+
+    public void AddArrowToWheel(Arrow arrow, Arrow nextArrow = null) {
+        Debug.Log("AddArrowToWheel" + arrow.name + " - " + nextArrow.name);
+        if (nextArrow != null) {
+            character.wheel.AddArrow(nextArrow, character.wheel.FindByArrow(arrow));
+        } else {
+            character.wheel.AddArrow(arrow);
+        }
+        character.inventory.RemoveArrowBySO(nextArrow.arrowSO);
+        wheelDisplay.SetupDisplay(character.wheel);
+        inventoryDisplay.SetupDisplay(character.inventory);
+    }
+
+    public void ReturnSliceToArsenal(Slice slice) {
+        character.wheel.RemoveSlice(slice);
+        character.arsenal.AddSlice(slice);
+        wheelDisplay.SetupDisplay(character.wheel);
+        // arsenalDisplay.SetupDisplay(character.arsenal);
+    }
+
+    public void ReturnArrowToInventory(Arrow arrow) {
+        character.wheel.DisableArrow(arrow);
+        character.inventory.AddArrowBySO(arrow.arrowSO);
+        wheelDisplay.SetupDisplay(character.wheel);
+        inventoryDisplay.SetupDisplay(character.inventory);
+    }
 }

@@ -8,8 +8,8 @@ public class CharacterSO : ScriptableObject
     public string description;
     public Sprite icon;
     public WheelSO initialWheel;
-    public ArrowSO[] initialArrows;
     public InventorySO initialInventory;
+    public ArsenalSO initialArsenal;
     public int initialHealth = 15;
     public int initialMaxHealth = 15;
     public int initialArmor = 0;

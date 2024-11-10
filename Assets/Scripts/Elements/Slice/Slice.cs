@@ -6,24 +6,13 @@ using TMPro;
 public class Slice : MonoBehaviour
 {
     public SliceSO sliceSO;
+    public string currentTitle;
     public int currentValue;
     public SliceType currentType;
     public SliceEffect currentEffect;
 
-    [SerializeField]
-    private MeshRenderer meshRenderer = null;
-    
-
-    [Header("Display Properties")]
-    private string titleTextString = "";
-    private string valueTextString = "";
-    public TMP_Text titleText = null;
-    public TMP_Text valueText = null;
-
-    void Start()
-    {
-        meshRenderer = GetComponent<MeshRenderer>();
-    }
+    public bool isLocked = false;
+    public bool isVoid = false;
 
     // SO methods
     public void Initialize(SliceSO newSO)
@@ -31,23 +20,22 @@ public class Slice : MonoBehaviour
         sliceSO = newSO;
         ChangeValue(sliceSO.initialValue);
         ChangeEffect(sliceSO.effect);
-        ChangeTitle(sliceSO.title);
         ChangeType(sliceSO.type);
+        name = sliceSO.name + " [" + currentValue + "]";
+        currentTitle = sliceSO.title;
     }
 
-    public void UpdateDisplay()
-    {
-        meshRenderer.material = currentType.material;
-        valueText.text = valueTextString;
-        titleText.text = titleTextString;
+    public void LoadSlice(Slice slice) {
+        ChangeValue(slice.currentValue);
+        ChangeEffect(slice.currentEffect);
+        ChangeType(slice.currentType);
+        name = slice.sliceSO.name + " [" + currentValue + "]";
+        currentTitle = slice.currentTitle;
     }
 
-    public void UpdateSOValues()
+    public void ChangeTitle()
     {
-        ChangeType(sliceSO.type);
-        ChangeValue(sliceSO.initialValue);
-        ChangeEffect(sliceSO.effect);
-        ChangeTitle(sliceSO.title);
+        currentTitle = sliceSO.title;
     }
 
     // Slice methods
@@ -59,24 +47,11 @@ public class Slice : MonoBehaviour
     public void ChangeValue(int value)
     {
         currentValue = value;
-        valueTextString = currentValue.ToString();
-        if (currentValue == 0)
-        {
-            valueTextString = "";
-        }
-    }
-
-    public void ChangeValueText()
-    {
+        name = sliceSO.name + " [" + currentValue + "]";
     }
 
     public void ChangeEffect(SliceEffect effect)
     {
         currentEffect = effect;
-    }
-
-    public void ChangeTitle(string title)
-    {
-        titleTextString = title;
     }
 }

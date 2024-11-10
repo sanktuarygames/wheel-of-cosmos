@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class SliceEditView : MonoBehaviour
+public class SliceArsenalEditView : MonoBehaviour
 {
     // Uses
     public Slice editSlice;
@@ -10,7 +10,6 @@ public class SliceEditView : MonoBehaviour
     void OnEnable()
     {
         // This should call the WheelViewMaster to show the slice edit view
-        editSlice = characterView.editSlice;
     }
 
     public void ChangeSliceType(SliceType newType)
@@ -26,7 +25,6 @@ public class SliceEditView : MonoBehaviour
 
     public void ChangeSliceEffect(string title)
     {
-        editSlice.ChangeTitle(title);
     }
 
     public void RemoveSlice() {

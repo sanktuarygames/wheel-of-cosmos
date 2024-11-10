@@ -5,31 +5,17 @@ public class Arrow : MonoBehaviour {
     public ArrowSO arrowSO;
     public ArrowType currentType;
 
-    [SerializeField]
-    private MeshRenderer meshRenderer = null;
-
-    void Start() {
-        meshRenderer = GetComponent<MeshRenderer>();
+    public void Initialize() {
+        Initialize(arrowSO);
     }
 
-    // SO methods
     public void Initialize(ArrowSO newSO) {
         arrowSO = newSO;
         ChangeType(arrowSO.type);
-    }
-
-    public void UpdateDisplay() {
-        meshRenderer.material = currentType.material;
     }
 
 
     public void ChangeType(ArrowType newType) {
         currentType = newType;
     }
-
-    // Arrow methods
-    public Slice GetSelectedSlice() {
-        return new Slice();
-    }
-
 }

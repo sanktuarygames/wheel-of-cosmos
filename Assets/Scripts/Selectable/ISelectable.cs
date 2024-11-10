@@ -5,5 +5,6 @@ interface ISelectable
     public bool isSelected { get; set; }
     public void Select(GameObject currentlySelectedObject = null);
     public void Unselect(GameObject currentlySelectedObject = null);
+    public void HandleInteraction(GameObject currentlySelectedObject = null);
 }
 

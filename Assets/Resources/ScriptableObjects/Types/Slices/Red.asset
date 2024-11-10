@@ -15,3 +15,4 @@ MonoBehaviour:
   id: 0
   typeName: Red
   material: {fileID: 2100000, guid: 904f53bf7fb55af4fa5e7c529995a518, type: 2}
+  baseType: 1

@@ -6,7 +6,7 @@ using TMPro;
 
 public class CharacterView : MonoBehaviour
 {
-    public GameObject characterTemplate;
+    // public GameObject characterTemplate;
 
     // There will be an adapter to control the displayables, as there will be a template for every character
     private Character character;
@@ -28,19 +28,21 @@ public class CharacterView : MonoBehaviour
     public TMP_InputField maxArmor;
 
     [Header("Character Elements")]
-    public Wheel displayWheel;
-    private Wheel wheel;
-    public Inventory inventory;
+    public WheelController wheelController;
+    public WheelDisplay wheelDisplay;
+    public InventoryDisplay inventoryDisplay;
 
-    [Header("Wheel Management")]
-    public DropZoneController arrowPositions;
-    public DropZoneController slicePositions;
-    public Transform wheelParent;
+    [Header("Main Panel Management")]
+    public GameObject slicesArsenalPanel;
+    public GameObject skyrsPanel;
+    public GameObject skillsPanel;
+    public TMP_Text slicesArsenalPanelTitle;
+    public TMP_Text skyrsPanelTitle;
+    public TMP_Text skillsPanelTitle;
 
-    [Header("Item Management")]
-    public Slice editSlice;
-    public GameObject sliceEditPanel;
-    public GameObject inventoryPanel;
+    [Header("Selected Item Actions Panel")]
+    public GameObject sliceSelectedActionsPanel;
+    public GameObject arrowSelectedActionsPanel;
 
     private Coroutine sliceEditDelay;
 
@@ -48,14 +50,21 @@ public class CharacterView : MonoBehaviour
     private float sliceEditTimeoutCounter = 0.25f;
     
 
-    void Awake() {
-        // Interactor.instance.onGrabItem.AddListener(OnGrabItem);
-        // Interactor.instance.onDropItem.AddListener(OnDropItem);
+    void OnEnable() {
+        LoadCharacter();
+        Selector.instance?.OnSelectItem.AddListener(ShowSelectedItemActionsPanel);
+        Selector.instance?.OnUnselectItem.AddListener(HideSelectedItemActionsPanel);
     }
 
-    void OnDestroy() {
-        // Interactor.instance.onGrabItem.RemoveListener(OnGrabItem);
-        // Interactor.instance.onDropItem.RemoveListener(OnDropItem);
+    void OnDisable() {
+        Selector.instance?.OnSelectItem.RemoveListener(ShowSelectedItemActionsPanel);
+        Selector.instance?.OnUnselectItem.RemoveListener(HideSelectedItemActionsPanel);
+    }
+
+    void Start() {
+        // LoadCharacter();
+        ShowArsenalSlicesPanel();
+        HideSelectedItemActionsPanel();
     }
 
     void Update() {
@@ -69,9 +78,7 @@ public class CharacterView : MonoBehaviour
             }
         }
     }
-    private void OnEnable() {
-        LoadCharacter();
-    }
+
     public void LoadCharacter() {
         character = GameMaster.Instance?.currentCharacter;
         if (character == null) return;
@@ -81,131 +88,124 @@ public class CharacterView : MonoBehaviour
         currentArmor.text = character.currentArmor.ToString();
         maxHealth.text = character.currentMaxHealth.ToString();
         maxArmor.text = character.currentMaxArmor.ToString();
-        wheel = character.wheel;
-        inventory = character.inventory;
-        // LoadWheel();
-        LoadNewWheel();
-    }
-
-    private void LoadNewWheel() {
-        Debug.Log("Loading wheel");
-        Debug.Log(wheelParent.childCount);
-        for(int i = 0; i < wheelParent.childCount; i++) {
-            Transform slicePosition = wheelParent.GetChild(i);
-            if (slicePosition.transform.childCount > 0) {
-                Destroy(slicePosition.transform.GetChild(0).gameObject);
-            }
-
-            if (wheel.currentSlices[i] != null) {
-                GameObject newSlice = Instantiate(slicePrefab, slicePosition.transform);
-                newSlice.GetComponent<Slice>().Initialize(wheel.currentSlices[i].sliceSO);
-                newSlice.name = newSlice.GetComponent<Slice>().currentType.typeName + " - " + newSlice.GetComponent<Slice>().currentValue;
-                newSlice.GetComponent<Slice>().UpdateDisplay();
-            }
-        }
+        LoadWheel();
+        LoadInventory();
     }
 
     private void LoadWheel() {
-        Debug.Log("Loading wheel");
-        int i = 0;
-        foreach(DropZone dropZone in slicePositions.dropZones) {
-            if (dropZone.transform.childCount > 0) {
-                Destroy(dropZone.transform.GetChild(0).gameObject);
-            }
+        wheelDisplay.SetupDisplay(character.wheel);
+    }
 
-            if (wheel.currentSlices[i] != null) {
-                GameObject newSlice = Instantiate(slicePrefab, dropZone.transform);
-                newSlice.GetComponent<Slice>().Initialize(wheel.currentSlices[i].sliceSO);
-                newSlice.name = newSlice.GetComponent<Slice>().currentType.typeName + " - " + newSlice.GetComponent<Slice>().currentValue;
-                newSlice.GetComponent<Slice>().UpdateDisplay();
-            }
-            i++;
-        }
-    
-        i = 0;
-        foreach(DropZone dropZone in arrowPositions.dropZones) {
-            if (dropZone.transform.childCount > 0) {
-                Destroy(dropZone.transform.GetChild(0).gameObject);
-            }
+    public void AddSliceValue() {
+        Debug.Log("AddSliceValue");
+        if (Selector.instance.currentSelectedObject == null) return;
+        Debug.Log("AddSliceValue");
+        SliceDisplay sliceDisplay = Selector.instance.currentSelectedObject.GetComponent<SliceDisplay>();
+        if (sliceDisplay == null) return;
+        Debug.Log("AddSliceValue");
+        character.wheel.AddSliceValue(sliceDisplay.currentSlice);
+        sliceDisplay.SetupDisplay(character.wheel.currentSlices[character.wheel.FindBySlice(sliceDisplay.currentSlice)]);
+    }
 
-            if (wheel.currentArrows[i] != null) {
-                GameObject newArrow = Instantiate(arrowPrefab, dropZone.transform);
-                newArrow.GetComponent<Arrow>().Initialize(wheel.currentArrows[i].arrowSO);
-                Debug.Log("Arrow type: " + newArrow.GetComponent<Arrow>().currentType);
-                Debug.Log(newArrow);
-                newArrow.name = newArrow.GetComponent<Arrow>().currentType.typeName  + " Arrow";
-                newArrow.GetComponent<Arrow>().UpdateDisplay();
-            }
-            i++;
-        }
+    public void RemoveSliceValue() {
+        SliceDisplay sliceDisplay = Selector.instance.currentSelectedObject.GetComponent<SliceDisplay>();
+        if (sliceDisplay == null) return;
+        character.wheel.RemoveSliceValue(sliceDisplay.currentSlice);
+        sliceDisplay.SetupDisplay(character.wheel.currentSlices[character.wheel.FindBySlice(sliceDisplay.currentSlice)]);
+    }
+
+    public void DisableSlice() {
+        SliceDisplay sliceDisplay = Selector.instance.currentSelectedObject.GetComponent<SliceDisplay>();
+        if (sliceDisplay == null) return;
+        character.wheel.DisableSlice(sliceDisplay.currentSlice);
+        sliceDisplay.SetupDisplay(character.wheel.currentSlices[character.wheel.FindBySlice(sliceDisplay.currentSlice)]);
+        Selector.instance.Unselect();
     }
 
     public void LoadInventory() {
+        inventoryDisplay.SetupDisplay(character.inventory);
+    }
+
+    public void AddArrowInventory() {
+        ArrowSelectable arrowSelectable = Selector.instance.currentSelectedObject.GetComponent<ArrowSelectable>();
+        ArrowArsenal arrowArsenal = Selector.instance.currentSelectedObject.GetComponent<ArrowArsenal>();
+
+        if (arrowSelectable != null) {
+            character.inventory.AddArrow(arrowSelectable.GetComponent<ArrowDisplay>().currentArrow.arrowSO);
+            inventoryDisplay.SetupDisplay(character.inventory);
+        } else if (arrowArsenal != null) {
+            Debug.Log("Added arrow to inventory" + arrowArsenal.GetComponent<ArrowDisplay>().currentArrow);
+            character.inventory.AddArrow(arrowArsenal.GetComponent<ArrowDisplay>().currentArrow.arrowSO);
+            Debug.Log("Added arrow to inventory");
+            Debug.Log(character.inventory.currentArrows.Count);
+            inventoryDisplay.SetupDisplay(character.inventory);
+        } else {
+            Debug.Log("Shouldnt be here");
+        }
+    }
+
+    public void RemoveArrowInventory() {
+        ArrowSelectable arrowSelectable = Selector.instance.currentSelectedObject.GetComponent<ArrowSelectable>();
+        ArrowArsenal arrowArsenal = Selector.instance.currentSelectedObject.GetComponent<ArrowArsenal>();
+
+        if (arrowSelectable != null) {
+            character.inventory.RemoveArrowBySO(arrowSelectable.GetComponent<ArrowDisplay>().currentArrow.arrowSO);
+            inventoryDisplay.SetupDisplay(character.inventory);
+        } else if (arrowArsenal != null) {
+            character.inventory.RemoveArrowBySO(arrowArsenal.GetComponent<ArrowDisplay>().currentArrow.arrowSO);
+            inventoryDisplay.SetupDisplay(character.inventory);
+        } else {
+            Debug.Log("Shouldnt be here");
+        }
     }
     
-    private void OnGrabItem(GameObject item) {
-        if (item.GetComponent<Slice>() != null) {
-            Slice slice = item.GetComponent<Slice>();
-            // if (sliceEditDelay != null) StopCoroutine(sliceEditDelay);
-            // sliceEditDelay = StartCoroutine(ToggleSliceEditDelay("ShowEditSlice"));
-
-            Animator charAnimator = characterTemplate.GetComponent<Animator>();
-            float currentTime = (charAnimator.GetCurrentAnimatorStateInfo(0).length - charAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime) * charAnimator.GetCurrentAnimatorStateInfo(0).speed;
-            charAnimator.Play("ShowEditSlice", 0, currentTime < 0 ? 0 : currentTime);
-
-            // characterTemplate.GetComponent<Animator>().SetTrigger("Show");
-            // characterTemplate.GetComponent<Animator>().PlayInFixedTime("Show");
-        } else if (item.GetComponent<Arrow>() != null) {
-            // We could highlight the dropzones here
-            Arrow arrow = item.GetComponent<Arrow>();
-            Debug.Log("Arrow grabbed: " + arrow.currentType.typeName);
+    public void ShowSelectedItemActionsPanel(GameObject item) {
+        if (item.GetComponent<SliceSelectable>() != null || item.GetComponent<SliceArsenal>() != null) {
+            sliceSelectedActionsPanel.SetActive(true);
+            arrowSelectedActionsPanel.SetActive(false);
+        } else if (item.GetComponent<ArrowSelectable>() != null || item.GetComponent<ArrowArsenal>() != null) {
+            sliceSelectedActionsPanel.SetActive(false);
+            arrowSelectedActionsPanel.SetActive(true);
         }
     }
-
-    private void OnDropItem(GameObject item) {
-        if (item.GetComponent<Slice>() != null) {
-            Slice slice = item.GetComponent<Slice>();
-            if (sliceEditDelay != null) StopCoroutine(sliceEditDelay);
-            sliceEditDelay = StartCoroutine(ToggleSliceEditDelay("HideEditSlice"));
-
-            Animator charAnimator = characterTemplate.GetComponent<Animator>();
-            float currentTime = (charAnimator.GetCurrentAnimatorStateInfo(0).length - charAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime) * charAnimator.GetCurrentAnimatorStateInfo(0).speed;
-            charAnimator.Play("HideEditSlice", 0, currentTime < 0 ? 0 : currentTime);
-
-            // Animator charAnimator = characterTemplate.GetComponent<Animator>();
-            // charAnimator.Play("HideEditSlice",0, charAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime/2);
-
-            // characterTemplate.GetComponent<Animator>().SetTrigger("Hide", layer);
-        } else if (item.GetComponent<Arrow>() != null) {
-            // We could hide the highlight of the dropzones here
-            Arrow arrow = item.GetComponent<Arrow>();
-            Debug.Log("Arrow dropped: " + arrow.currentType.typeName);
-        }
-    }
-    public void ShowSliceEdit(Slice slice) {
-        Debug.Log("Showing slice edit");
-        // if (slice == null) return;
-        StartCoroutine(ToggleSliceEditDelay("ShowEditSlice"));
-        // sliceEditPanel.SetActive(true);
-        // inventoryPanel.SetActive(false);
-        
+    public void HideSelectedItemActionsPanel(GameObject item = null) {
+        sliceSelectedActionsPanel.SetActive(false);
+        arrowSelectedActionsPanel.SetActive(false);
     }
 
-    IEnumerator ToggleSliceEditDelay(string animation) {
-        yield return new WaitForSeconds(0.25f);
-        Animator charAnimator = characterTemplate.GetComponent<Animator>();
-        charAnimator.Play(animation, 0, charAnimator.GetCurrentAnimatorStateInfo(0).length - (charAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime * charAnimator.GetCurrentAnimatorStateInfo(0).speed));
-        sliceEditDelay = null;
+    public void ShowArsenalSlicesPanel() {
+        skyrsPanel.SetActive(false);
+        skillsPanel.SetActive(false);
+        slicesArsenalPanel.SetActive(true);
+        slicesArsenalPanelTitle.color = new Color(1, 1, 1, 1);
+        skyrsPanelTitle.color = new Color(0, 0, 0, 1);
+        skillsPanelTitle.color = new Color(0, 0, 0, 1);
+        Selector.instance.Unselect();
     }
 
-    public void ShowInventory() {
-        inventoryPanel.SetActive(true);
-        sliceEditPanel.SetActive(false);
+    public void ShowSkyrsPanel() {
+        skyrsPanel.SetActive(true);
+        skillsPanel.SetActive(false);
+        slicesArsenalPanel.SetActive(false);
+        slicesArsenalPanelTitle.color = new Color(0, 0, 0, 1);
+        skyrsPanelTitle.color = new Color(1, 1, 1, 1);
+        skillsPanelTitle.color = new Color(0, 0, 0, 1);
+        Selector.instance.Unselect();
+    }
+
+    public void ShowSkillsPanel() {
+        skyrsPanel.SetActive(false);
+        skillsPanel.SetActive(true);
+        slicesArsenalPanel.SetActive(false);
+        slicesArsenalPanelTitle.color = new Color(0, 0, 0, 1);
+        skyrsPanelTitle.color = new Color(0, 0, 0, 1);
+        skillsPanelTitle.color = new Color(1, 1, 1, 1);
+        Selector.instance.Unselect();
     }
 
     public void Spin() {
-        displayWheel.GetComponentInChildren<WheelController>().Spin();
-
+        if (wheelController.isSpining) return;
+        wheelController.Spin();
     }
 
 }

@@ -16,4 +16,8 @@ public class Selectable : MonoBehaviour, ISelectable
     {
         isSelected = false;
     }
+
+    public virtual void HandleInteraction(GameObject currentlySelectedObject = null)
+    {
+    }
 }

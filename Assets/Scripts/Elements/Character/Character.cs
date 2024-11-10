@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
     public CharacterSO characterSO;
     public Wheel wheel;
     public Inventory inventory;
+    public Arsenal arsenal;
 
     public int currentHealth = 15;
     public int currentMaxHealth = 15;
@@ -20,12 +21,6 @@ public class Character : MonoBehaviour
     {
         this.characterSO = characterSO;
         LoadData();
-        wheel = new GameObject("Wheel").AddComponent<Wheel>();
-        inventory = new GameObject("Inventory").AddComponent<Inventory>();
-        wheel.Initialize(characterSO.initialWheel);
-        inventory.Initialize(characterSO.initialInventory);
-        wheel.transform.SetParent(transform);
-        inventory.transform.SetParent(transform);
     }
 
     private void LoadData()
@@ -38,11 +33,14 @@ public class Character : MonoBehaviour
         currentMaxArmor = characterSO.initialMaxArmor;
         currentEffects = characterSO.effects;
 
-        // Load the data into the wheel and inventory
-
-        // wheel = new Wheel(characterSO.initialWheel);
-        // inventory = new Inventory(characterSO.initialInventory);
-        // wheel.Initialize(characterSO.initialWheel);
-        // inventory.Initialize(characterSO.initialInventory);
+        wheel = new GameObject("Wheel").AddComponent<Wheel>();
+        inventory = new GameObject("Inventory").AddComponent<Inventory>();
+        arsenal = new GameObject("Arsenal").AddComponent<Arsenal>();
+        wheel.Initialize(characterSO.initialWheel);
+        inventory.Initialize(characterSO.initialInventory);
+        arsenal.Initialize(characterSO.initialArsenal);
+        wheel.transform.SetParent(transform);
+        inventory.transform.SetParent(transform);
+        arsenal.transform.SetParent(transform);
     }
 }

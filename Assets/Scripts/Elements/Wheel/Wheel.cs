@@ -1,13 +1,8 @@
 using UnityEngine;
-using System.Collections;
-using UnityEngine.InputSystem;
-using System.Collections.Generic;
 
 public class Wheel : MonoBehaviour
 {
     private WheelSO wheelSO;
-    public DropZoneController arrowPositions;
-    public DropZoneController slicePositions;
     public Arrow[] currentArrows = new Arrow[6];
     public Slice[] currentSlices = new Slice[6];
 
@@ -20,7 +15,6 @@ public class Wheel : MonoBehaviour
         for (int i = 0; i < wheelSO.initialSlices.Length; i++) {
             currentSlices[i] = new GameObject("Slice").AddComponent<Slice>();
             currentSlices[i].Initialize(wheelSO.initialSlices[i]);
-            // Use dropzone controller to add the slices to the places
             currentSlices[i].transform.SetParent(transform);
         }
 
@@ -28,9 +22,7 @@ public class Wheel : MonoBehaviour
             currentArrows[i] = new GameObject("Arrow").AddComponent<Arrow>();
             currentArrows[i].Initialize(wheelSO.initialArrows[i]);
             currentArrows[i].transform.SetParent(transform);
-            // Use dropzone controller to add the arrows to the places
         }
-        
     }
 
     public void AddArrow(Arrow arrow) {
@@ -67,5 +59,73 @@ public class Wheel : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void ChangeSlice(Slice currentSlice, Slice newSlice) {
+        int index = FindBySlice(currentSlice);
+        currentSlices[index] = newSlice;
+    }
+
+    public void AddSliceValue(Slice slice) {
+        for (int i = 0; i < currentSlices.Length; i++) {
+            if (currentSlices[i] == slice) {
+                currentSlices[i].currentValue++;
+                break;
+            }
+        }
+    }
+
+    public void RemoveSliceValue(Slice slice) {
+        for (int i = 0; i < currentSlices.Length; i++) {
+            if (currentSlices[i] == slice) {
+                currentSlices[i].currentValue--;
+                break;
+            }
+        }
+    }
+
+    public void DisableSlice(Slice slice) {
+        for (int i = 0; i < currentSlices.Length; i++) {
+            if (currentSlices[i] == slice) {
+                currentSlices[i].Initialize(Resources.Load<SliceSO>("ScriptableObjects/Slices/Void"));
+                break;
+            }
+        }
+    }
+
+    public int FindBySlice(Slice slice) {
+        for (int i = 0; i < currentSlices.Length; i++) {
+            if (currentSlices[i] == slice) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int FindByArrow(Arrow arrow) {
+        for (int i = 0; i < currentArrows.Length; i++) {
+            if (currentArrows[i] == arrow) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void SwapSlices(GameObject initialSlice, GameObject finalSlice) {
+        Slice initial = initialSlice.GetComponent<SliceDisplay>().currentSlice;
+        Slice final = finalSlice.GetComponent<SliceDisplay>().currentSlice;
+        int initialIndex = FindBySlice(initial);
+        int finalIndex = FindBySlice(final);
+        currentSlices[initialIndex] = final;
+        currentSlices[finalIndex] = initial;
+    }
+
+    public void SwapArrows(GameObject initialArrow, GameObject finalArrow) {
+        Arrow initial = initialArrow.GetComponent<ArrowDisplay>().currentArrow;
+        Arrow final = finalArrow.GetComponent<ArrowDisplay>().currentArrow;
+        int initialIndex = FindByArrow(initial);
+        int finalIndex = FindByArrow(final);
+        currentArrows[initialIndex] = final;
+        currentArrows[finalIndex] = initial;
     }
 }

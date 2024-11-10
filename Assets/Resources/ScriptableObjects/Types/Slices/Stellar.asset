@@ -15,3 +15,4 @@ MonoBehaviour:
   id: 0
   typeName: Stellar
   material: {fileID: 2100000, guid: 312a1972f75b56b49b7c34a75ebb472f, type: 2}
+  baseType: 6

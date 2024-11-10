@@ -15,3 +15,4 @@ MonoBehaviour:
   id: 3
   typeName: Green
   material: {fileID: 2100000, guid: 05350189a0d334c41bbccedfb458bef5, type: 2}
+  baseType: 3

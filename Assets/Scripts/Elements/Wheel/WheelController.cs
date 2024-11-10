@@ -12,7 +12,7 @@ public class WheelController : MonoBehaviour
     public float wheelSpeed = 0.1f;
     public Vector3 direction = new Vector3(0, 1, 0);
     public float rotationAngle = 60;
-    bool rotating = false;
+    public bool isSpining = false;
     public Rigidbody rb;
     IEnumerator spinRoutine;
 
@@ -30,16 +30,16 @@ public class WheelController : MonoBehaviour
 
     public void ResetSpin()
     {
-        rotating = false;
+        isSpining = false;
     }
 
     IEnumerator RotateObject()
     {
-        if (rotating)
+        if (isSpining)
         {
             yield break;
         }
-        rotating = true;
+        isSpining = true;
 
         float counter = 0;
         while (counter < spins * spinSpeed)
@@ -50,12 +50,12 @@ public class WheelController : MonoBehaviour
                 transform.eulerAngles.y + rotationAngle,
                 transform.eulerAngles.z
             );
-            Debug.Log("Rotating");
+            Debug.Log("IsSpining");
             Debug.Log(transform.eulerAngles);
 
             yield return new WaitForSeconds(wheelSpeed);
         }
-        rotating = false;
+        isSpining = false;
     }
 
     void Update()

@@ -7,6 +7,7 @@ public class ArrowType: ScriptableObject
 {
     public int id;
     public string typeName;
+    public BaseType baseType;
     public Material material;
-
 }
+

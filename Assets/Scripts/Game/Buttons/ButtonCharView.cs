@@ -40,6 +40,7 @@ public class ButtonCharView : Grabbable
 
     public override void Grab()
     {
+        if (dropZoneController.isFrozen) return;
         base.Grab();
 
         if (currentPosition != null)

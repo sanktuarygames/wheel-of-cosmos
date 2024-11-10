@@ -17,8 +17,8 @@ MonoBehaviour:
   description: The Immortal
   icon: {fileID: 0}
   initialWheel: {fileID: 11400000, guid: 7af0a91a7ba842f4e9c61a1cccd20d2c, type: 2}
-  initialArrows: []
-  initialInventory: {fileID: 0}
+  initialInventory: {fileID: 11400000, guid: fc4f7cbed0b562b4cb3943a335e9eac2, type: 2}
+  initialArsenal: {fileID: 11400000, guid: 3ad7d0579cb04f446b786eb6e9a23b38, type: 2}
   initialHealth: 9
   initialMaxHealth: 9
   initialArmor: 0

@@ -17,8 +17,8 @@ MonoBehaviour:
   description: The Parasyte
   icon: {fileID: 21300000, guid: 4705d6173abe5c34f9abf37f5f8d6184, type: 3}
   initialWheel: {fileID: 11400000, guid: 2d6921f893ac46c4da2f1710557c57e9, type: 2}
-  initialArrows: []
-  initialInventory: {fileID: 0}
+  initialInventory: {fileID: 11400000, guid: 299a3b52bcbd3c24286a1c75e3cb8998, type: 2}
+  initialArsenal: {fileID: 11400000, guid: 3ad7d0579cb04f446b786eb6e9a23b38, type: 2}
   initialHealth: 5
   initialMaxHealth: 5
   initialArmor: 0

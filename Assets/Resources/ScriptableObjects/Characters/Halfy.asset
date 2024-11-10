@@ -17,10 +17,10 @@ MonoBehaviour:
   description: The Bakunuki
   icon: {fileID: 21300000, guid: 737443472712c0b489af93a6d6078dd5, type: 3}
   initialWheel: {fileID: 11400000, guid: 9472690139739ef49a77ce14a93307d2, type: 2}
-  initialArrows: []
-  initialInventory: {fileID: 0}
-  initialHealth: 15
-  initialMaxHealth: 15
+  initialInventory: {fileID: 11400000, guid: ba2b942d020250e40bfeac3b77b3f59c, type: 2}
+  initialArsenal: {fileID: 11400000, guid: 3ad7d0579cb04f446b786eb6e9a23b38, type: 2}
+  initialHealth: 10
+  initialMaxHealth: 10
   initialArmor: 0
   initialMaxArmor: 0
   effects: []

@@ -15,3 +15,4 @@ MonoBehaviour:
   id: 0
   typeName: Cursed
   material: {fileID: 2100000, guid: ed9ca6203904f364fa518070d9d0cb82, type: 2}
+  baseType: 5

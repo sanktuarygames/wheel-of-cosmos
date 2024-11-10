@@ -17,8 +17,8 @@ MonoBehaviour:
   description: The Revolutionary
   icon: {fileID: 21300000, guid: 389ef6865747f3c4cb724b3c1eb6f8f3, type: 3}
   initialWheel: {fileID: 11400000, guid: b5a3191413876d24d801a7b112cf53c0, type: 2}
-  initialArrows: []
-  initialInventory: {fileID: 0}
+  initialInventory: {fileID: 11400000, guid: a050664ecb77838408a656e9381552e3, type: 2}
+  initialArsenal: {fileID: 11400000, guid: 3ad7d0579cb04f446b786eb6e9a23b38, type: 2}
   initialHealth: 20
   initialMaxHealth: 20
   initialArmor: 0

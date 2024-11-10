@@ -4129,7 +4129,7 @@ GameObject:
   - component: {fileID: 3657177917151847080}
   - component: {fileID: 6466697355547463888}
   m_Layer: 0
-  m_Name: DefaultCharacterTemplate
+  m_Name: Deprecated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

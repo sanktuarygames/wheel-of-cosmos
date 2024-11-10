@@ -17,8 +17,8 @@ MonoBehaviour:
   description: The Universe
   icon: {fileID: 0}
   initialWheel: {fileID: 11400000, guid: 5ea7d6ec8a9b03a4a8ba9b3a906eb3a3, type: 2}
-  initialArrows: []
-  initialInventory: {fileID: 0}
+  initialInventory: {fileID: 11400000, guid: e3ab8aa483c385644b0520af344ee927, type: 2}
+  initialArsenal: {fileID: 11400000, guid: 3ad7d0579cb04f446b786eb6e9a23b38, type: 2}
   initialHealth: 20
   initialMaxHealth: 20
   initialArmor: 0

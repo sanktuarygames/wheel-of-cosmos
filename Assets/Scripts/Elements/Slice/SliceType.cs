@@ -8,5 +8,6 @@ public class SliceType: ScriptableObject
     public int id;
     public string typeName;
     public Material material;
+    public BaseType baseType;
 
 }

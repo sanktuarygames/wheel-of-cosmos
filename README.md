@@ -1,3 +1,3 @@
 # CURRENT VERSION 
 
-[Beta](https://pages.github.com/](https://drive.google.com/drive/u/2/folders/19AVA4ZDH1m9DNJDhQiSBW912WA7tMcbV))
+[Beta](https://drive.google.com/drive/u/2/folders/19AVA4ZDH1m9DNJDhQiSBW912WA7tMcbV)

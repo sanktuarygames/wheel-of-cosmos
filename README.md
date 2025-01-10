@@ -1,1 +1,3 @@
-https://docs.google.com/spreadsheets/d/1UsoXh05mc9v2Jrm2LH4sHYIzYCKCEKrIzgddBMC369M/edit?gid=0#gid=0
+# CURRENT VERSION 
+
+[Beta](https://pages.github.com/](https://drive.google.com/drive/u/2/folders/19AVA4ZDH1m9DNJDhQiSBW912WA7tMcbV))
